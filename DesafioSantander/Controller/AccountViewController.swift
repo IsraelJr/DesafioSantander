@@ -8,23 +8,77 @@
 
 import UIKit
 
-class MainViewController: UIViewController {
+class AccountViewController: UIViewController {
 
+    @IBOutlet weak var labelBalance: UILabel!
+    @IBOutlet weak var tableviewDetail: UITableView!
+    
+    var launchs: [Launch] = []
+    var balance: Double = 1000.00
+    var timer: Timer?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        loadLaunchs()
+        calculateBalance()
+        
+    }
+    
+    func calculateBalance() {
+        
+        for i in 0..<launchs.count {
+            balance += launchs[i].value
+        }
+        labelBalance.text = "R$ " + String(format: "%.2f", balance)
+    }
+    
+    
+    
+    func loadLaunchs (){
+        
+        let fileURL = Bundle.main.url(forResource: "launchs.json", withExtension: nil)!
+        let jsonData = try! Data(contentsOf: fileURL)
+        do {
+            launchs = try JSONDecoder().decode([Launch].self, from: jsonData)
+        } catch {
+            print("Erro na LaunchManager: " + error.localizedDescription)
+        }
     }
     
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    @IBAction func buttonLogout(_ sender: UIButton) {
+        sender.setBackgroundImage(UIImage(named: "logout 3.png"), for: UIControl.State.normal)
+        timer?.invalidate()
+        timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { (timer) in
+            self.dismiss(animated: true, completion: nil)
+        }
     }
-    */
-
+    
 }
+
+
+extension AccountViewController: UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return launchs.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let cell = tableviewDetail.dequeueReusableCell(withIdentifier: "cellDetail", for: indexPath) as! DetailTableViewCell
+        let launch =  launchs[indexPath.row]
+        cell.prepare(with: launch)
+        
+        return cell
+    }
+    
+}
+
+    
+extension AccountViewController: UITableViewDelegate {
+        
+    }
+    
+
+
