@@ -30,7 +30,7 @@ class AccountViewController: UIViewController {
         for i in 0..<launchs.count {
             balance += launchs[i].value
         }
-        labelBalance.text = "R$ " + String(format: "%.2f", balance)
+        labelBalance.text = String(format: "R$ %.2f", balance)
     }
     
     
@@ -66,7 +66,14 @@ extension AccountViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
+        
         let cell = tableviewDetail.dequeueReusableCell(withIdentifier: "cellDetail", for: indexPath) as! DetailTableViewCell
+//        cell.layer.cornerRadius = 6
+//        cell.layer.shadowOffset = CGSize.init(width: 0, height: 5)
+//        cell.layer.shadowOpacity = 50
+//        cell.layer.borderWidth = 1
+        
+        
         let launch =  launchs[indexPath.row]
         cell.prepare(with: launch)
         

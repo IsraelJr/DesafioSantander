@@ -10,15 +10,20 @@ import UIKit
 
 class DetailTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var labelTypeLaunch: UILabel!
-    @IBOutlet weak var labelDateLaunch: UILabel!
+    @IBOutlet weak var labelTypeLaunch:  UILabel!
+    @IBOutlet weak var labelDateLaunch:  UILabel!
     @IBOutlet weak var labelNameAccount: UILabel!
     @IBOutlet weak var labelValueLaunch: UILabel!
-
+    @IBOutlet weak var uiviewLanch:      UIView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        
+        uiviewLanch.layer.shadowColor = UIColor.lightGray.cgColor
+        uiviewLanch.layer.shadowOffset = CGSize(width: 0, height: 5 )
+        uiviewLanch.layer.shadowOpacity = 0.5
+        uiviewLanch.layer.shadowRadius = 6
+        uiviewLanch.layer.cornerRadius = 6
         
     }
 
@@ -29,11 +34,22 @@ class DetailTableViewCell: UITableViewCell {
     }
     
     func prepare(with launch: Launch){
-      
+
         labelTypeLaunch.text  = launch.title
         labelNameAccount.text = launch.desc
         labelDateLaunch.text  = launch.date
         labelValueLaunch.text = launch.valueFormatted
+        
+        formattedShadowView(with: launch.value)
+    }
+    
+    private func formattedShadowView(with value: Double) {
+
+        if (value < 0){
+            uiviewLanch.layer.shadowColor = UIColor.red.cgColor
+        } else {
+            uiviewLanch.layer.shadowColor = UIColor.blue.cgColor
+        }
 
     }
 
