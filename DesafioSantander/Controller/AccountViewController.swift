@@ -13,7 +13,8 @@ class AccountViewController: UIViewController {
     @IBOutlet weak var labelBalance: UILabel!
     @IBOutlet weak var tableviewDetail: UITableView!
     
-    var launchs: [Launch] = []
+    var statements: [StatementModel] = []
+    var listStatement: [StatementList] = []
     var balance: Double = 1000.00
     var timer: Timer?
     
@@ -27,8 +28,8 @@ class AccountViewController: UIViewController {
     
     func calculateBalance() {
         
-        for i in 0..<launchs.count {
-            balance += launchs[i].value
+        for i in 0..<statements.count {
+            balance += statements[i].statementList[i].value
         }
         labelBalance.text = String(format: "R$ %.2f", balance)
     }
@@ -40,7 +41,8 @@ class AccountViewController: UIViewController {
         let fileURL = Bundle.main.url(forResource: "launchs.json", withExtension: nil)!
         let jsonData = try! Data(contentsOf: fileURL)
         do {
-            launchs = try JSONDecoder().decode([Launch].self, from: jsonData)
+            statements = try JSONDecoder().decode([StatementModel].self, from: jsonData)
+            listStatement.append(StatementList(title: "caiu", desc: "ja", date: "eu", value: 20.9))
         } catch {
             print("Erro na LaunchManager: " + error.localizedDescription)
         }
@@ -61,7 +63,7 @@ class AccountViewController: UIViewController {
 extension AccountViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return launchs.count
+        return listStatement.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -73,13 +75,19 @@ extension AccountViewController: UITableViewDataSource {
 //        cell.layer.shadowOpacity = 50
 //        cell.layer.borderWidth = 1
         
+        for x in listStatement {
+            let register =  x.[indexPath.row]
+            cell.prepare(with: register)
+            
+        }
         
-        let launch =  launchs[indexPath.row]
-        cell.prepare(with: launch)
         
         return cell
     }
     
+//    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+//        return 0
+//    }
 }
 
     

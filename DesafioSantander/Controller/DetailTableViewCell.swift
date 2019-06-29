@@ -33,14 +33,14 @@ class DetailTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func prepare(with launch: Launch){
+    func prepare(with statement: StatementList){
 
-        labelTypeLaunch.text  = launch.title
-        labelNameAccount.text = launch.desc
-        labelDateLaunch.text  = launch.date
-        labelValueLaunch.text = launch.valueFormatted
+        labelTypeLaunch.text  = statement.title
+        labelNameAccount.text = statement.desc
+        labelDateLaunch.text  = statement.date
+        labelValueLaunch.text = statement.valueFormatted
         
-        formattedShadowView(with: launch.value)
+        formattedShadowView(with: statement.value)
     }
     
     private func formattedShadowView(with value: Double) {

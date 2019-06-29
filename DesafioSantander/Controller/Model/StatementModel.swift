@@ -8,8 +8,12 @@
 
 import Foundation
 
-struct Launch: Codable {
-    
+struct StatementModel: Codable {
+    let statementList: [StatementList]
+    //let error: Error
+}
+
+struct StatementList: Codable {
     let title: String
     let desc: String
     let date: String
@@ -18,12 +22,4 @@ struct Launch: Codable {
     var valueFormatted: String {
         return "R$ \(value)"
     }
-    init(_ title: String, _ desc: String, _ date: String, _ value: Double) {
-        self.title = title
-        self.desc = desc
-        self.date = date
-        self.value = value
-    }
-    
-    
 }
