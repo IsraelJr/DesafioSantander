@@ -1,4 +1,4 @@
-[{
+{
     "statementList": [
         {
             "title": "Pagamento",
@@ -54,7 +54,6 @@
             "date": "2018-08-21",
             "value": 1400.5
         }
-    ],
-    "error": {}
+    ]
 }
-]
+

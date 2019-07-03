@@ -20,6 +20,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var lcLeadingUser:           NSLayoutConstraint!
     @IBOutlet weak var lcTrailingUser:          NSLayoutConstraint!
     @IBOutlet weak var lcSpaceTextSaveSwitch:   NSLayoutConstraint!
+    @IBOutlet weak var lcTrailingButtonInfo:    NSLayoutConstraint!
     @IBOutlet weak var buttonLogin:             UIButton!
     
     var valueInitialLcTopLogo:              CGFloat!
@@ -27,6 +28,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     var valueInitialLcTrailingUser:         CGFloat!
     var valueInitialLcSpaceTextSaveSwitch:  CGFloat!
     var valueInitialButtonLogin:            CGFloat!
+    var valueInitiallcTrailingButtonInfo:   CGFloat!
     
     var timer: Timer?
 //    var isValidUser: Bool       = false
@@ -42,10 +44,10 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        REST.loadStatements()
-    }
+//    override func viewWillAppear(_ animated: Bool) {
+//        super.viewWillAppear(animated)
+//        REST.loadStatements()
+//    }
     
     
     func initializeConstraint() {
@@ -55,10 +57,12 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         valueInitialLcTrailingUser          = lcTrailingUser.constant
         valueInitialLcSpaceTextSaveSwitch   = lcSpaceTextSaveSwitch.constant
         valueInitialButtonLogin             = buttonLogin.alpha
+        valueInitiallcTrailingButtonInfo    = lcTrailingButtonInfo.constant
         
         lcTopLogo.constant              = -100
         lcLeadingUser.constant          = 17
         lcTrailingUser.constant         = 270
+        lcTrailingButtonInfo.constant   = lcTrailingUser.constant
         lcSpaceTextSaveSwitch.constant  = lcLeadingUser.constant
         buttonLogin.alpha               = 0.0
         
@@ -80,10 +84,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         
         timer = Timer.scheduledTimer(withTimeInterval: 1.5, repeats: false) { (timer) in
             self.textFieldUser.text = self.ud.string(forKey: "user")
-//            if !self.textFieldUser.text!.isEmpty {
-//                self.isValidUser = true
-//            }
-            
+
             //self.login(self.buttonLogin)
         }
     }
@@ -94,6 +95,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             self.lcTopLogo.constant             = self.valueInitialLcTopLogo
             self.lcLeadingUser.constant         = self.valueInitialLcLeadingUser
             self.lcTrailingUser.constant        = self.valueInitialLcTrailingUser
+            self.lcTrailingButtonInfo.constant  = self.valueInitiallcTrailingButtonInfo
             self.lcSpaceTextSaveSwitch.constant = self.valueInitialLcSpaceTextSaveSwitch
             self.buttonLogin.alpha              = self.valueInitialButtonLogin
             
@@ -116,7 +118,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             
 //            if(validationPassword(passwordUser: textFieldPassword.text ?? "")){
             view.endEditing(true)
-            login(buttonLogin)
+            actionButtons(buttonLogin)
 //                return isValid
             }
         return true
@@ -127,22 +129,26 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     }
     
     
-    @IBAction func login(_ sender: UIButton) {
-        
-        if validationEmail(emailUser: textFieldUser.text ?? "") &&
-            validationPassword(passwordUser: textFieldPassword.text ?? "") {
+    @IBAction func actionButtons(_ sender: UIButton) {
+      
+        if sender.restorationIdentifier == "buttonLogin" {
             
-//        if loginValidate(textFieldUser) && loginValidate(textFieldPassword) {
-        
-//            isValidUser     = false
-//            isValidPassword = false
-//
-            dismiss(animated: true, completion: nil)
-        
-            saveUserDefault()
-        
-            performSegue(withIdentifier: "segueSceneAccount", sender: nil)
-        
+            if (isValidEmail(emailUser: textFieldUser.text ?? "") || isValidCPF(cpfUser: textFieldUser.text ?? "")) &&
+                isValidPassword(passwordUser: textFieldPassword.text ?? "") {
+                
+                dismiss(animated: true, completion: nil)
+                
+                saveUserDefault()
+                
+                performSegue(withIdentifier: "segueSceneAccount", sender: nil)
+                
+            } else {
+                showAlert(sender.restorationIdentifier!)
+                
+            }
+        } else {
+            print("Botão de informação")
+            showAlert(sender.restorationIdentifier!)
         }
     }
     
@@ -157,27 +163,33 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         textFieldPassword.text = nil
         
     }
+
     
-//    func loginValidate(_ textField: UITextField) -> Bool {
-//
-//        if textField == textFieldUser {
-//
-//            if (validationEmail(emailUser: textFieldUser.text ?? "")){
-////                self.isValidUser = true
-////                return isValidUser
-//                return true
-//            }
-//
-//        } else {
-//
-//            if(validationPassword(passwordUser: textFieldPassword.text ?? "")){
-////                self.isValidPassword = true
-////                return isValidPassword
-//                return true
-//            }
-//        }
-//        return false
-//    }
-    
-    
+    func showAlert(_ with: String) {
+        
+        var message: UIAlertController? = nil
+        var textAlert = ""
+        var textTitleAlert = ""
+        
+        switch with {
+        case "buttonLogin":
+            print("p")
+            textTitleAlert = "Falha no Login"
+            textAlert = "Dados de Login Incorretos."
+            
+        case "buttonInfo":
+            textTitleAlert = "Informação"
+            textAlert = "Digite seu E-Mail ou CPF."
+        
+        default:
+            print("Valor Default identifica Sucesso")
+        }
+        
+        message = UIAlertController(title: textTitleAlert, message: textAlert, preferredStyle: .alert)
+        
+        message!.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
+            NSLog("The \"OK\" alert occured.")}))
+        
+        present(message!, animated: true, completion: nil)
+    }
 }

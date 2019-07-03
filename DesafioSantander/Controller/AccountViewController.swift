@@ -13,39 +13,47 @@ class AccountViewController: UIViewController {
     @IBOutlet weak var labelBalance: UILabel!
     @IBOutlet weak var tableviewDetail: UITableView!
     
-    var statements: [StatementModel] = []
-    var listStatement: [StatementList] = []
-    var balance: Double = 1000.00
+    var statementModel: StatementModel!
+    var statementList: [StatementList] = []
+    var balance: Double = 0.0
     var timer: Timer?
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        loadLaunchs()
-        calculateBalance()
+        loadStatements()
         
     }
     
+    
     func calculateBalance() {
-        
-        for i in 0..<statements.count {
-            balance += statements[i].statementList[i].value
-        }
+        for i in 0..<statementList.count {
+                balance += statementList[i].value
+            }
         labelBalance.text = String(format: "R$ %.2f", balance)
     }
     
     
-    
-    func loadLaunchs (){
+    func loadStatements() {
+
+//        let fileURL = Bundle.main.url(forResource: "launchs.json", withExtension: nil)!
+//        let jsonData = try! Data(contentsOf: fileURL)
+//        do {
+//            statementModel = try JSONDecoder().decode(StatementModel.self, from: jsonData)
+//        } catch {
+//            print("Erro na LaunchManager: " + error.localizedDescription)
+//        }
         
-        let fileURL = Bundle.main.url(forResource: "launchs.json", withExtension: nil)!
-        let jsonData = try! Data(contentsOf: fileURL)
-        do {
-            statements = try JSONDecoder().decode([StatementModel].self, from: jsonData)
-            listStatement.append(StatementList(title: "caiu", desc: "ja", date: "eu", value: 20.9))
-        } catch {
-            print("Erro na LaunchManager: " + error.localizedDescription)
-        }
+        REST.loadStatements(onComplete: { (StatementModelAPI) in
+
+            self.statementList = StatementModelAPI.statementList
+            DispatchQueue.main.async {
+                self.tableviewDetail.reloadData()
+                self.calculateBalance()                
+            }
+                }) { (error) in
+                    print("Deu o erro aqui: \(error)")
+                }
     }
     
 
@@ -63,31 +71,16 @@ class AccountViewController: UIViewController {
 extension AccountViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return listStatement.count
+        return statementList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        
         let cell = tableviewDetail.dequeueReusableCell(withIdentifier: "cellDetail", for: indexPath) as! DetailTableViewCell
-//        cell.layer.cornerRadius = 6
-//        cell.layer.shadowOffset = CGSize.init(width: 0, height: 5)
-//        cell.layer.shadowOpacity = 50
-//        cell.layer.borderWidth = 1
-        
-        for x in listStatement {
-            let register =  x.[indexPath.row]
-            cell.prepare(with: register)
-            
-        }
-        
-        
+        cell.prepare(with: statementList[indexPath.row])
         return cell
     }
     
-//    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-//        return 0
-//    }
+
 }
 
     

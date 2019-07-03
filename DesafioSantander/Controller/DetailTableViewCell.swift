@@ -37,7 +37,7 @@ class DetailTableViewCell: UITableViewCell {
 
         labelTypeLaunch.text  = statement.title
         labelNameAccount.text = statement.desc
-        labelDateLaunch.text  = statement.date
+        labelDateLaunch.text  = statement.dateFormatted
         labelValueLaunch.text = statement.valueFormatted
         
         formattedShadowView(with: statement.value)
