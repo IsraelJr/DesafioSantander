@@ -8,21 +8,31 @@
 
 import UIKit
 
-class AccountViewController: UIViewController {
+class AccountViewControllerMVC: UIViewController {
 
-    @IBOutlet weak var labelBalance: UILabel!
-    @IBOutlet weak var tableviewDetail: UITableView!
+    @IBOutlet weak var labelNamePerson:  UILabel!
+    @IBOutlet weak var labelDataAccount: UILabel!
+    @IBOutlet weak var labelBalance:     UILabel!
+    @IBOutlet weak var tableviewDetail:  UITableView!
+    
+    let rateCoercion      = 0.99
+    let passwordCoercion  = "1234"
     
     var statementModel: StatementModel!
     var statementList: [StatementList] = []
     var balance: Double = 0.0
     var timer: Timer?
     
+    var nameUser        = "José Da Silva"
+    var dataAccount     = "2051 / 01.123456-7"
+    var passwordUser    = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         loadStatements()
-        
+        labelNamePerson.text = nameUser
+        labelDataAccount.text = dataAccount
     }
     
     
@@ -31,19 +41,14 @@ class AccountViewController: UIViewController {
                 balance += statementList[i].value
             }
         labelBalance.text = String(format: "R$ %.2f", balance)
+        if passwordUser == passwordCoercion {
+            labelBalance.text = String(format: "R$ %.2f", (balance - (balance * rateCoercion)))
+        }
     }
     
     
     func loadStatements() {
 
-//        let fileURL = Bundle.main.url(forResource: "launchs.json", withExtension: nil)!
-//        let jsonData = try! Data(contentsOf: fileURL)
-//        do {
-//            statementModel = try JSONDecoder().decode(StatementModel.self, from: jsonData)
-//        } catch {
-//            print("Erro na LaunchManager: " + error.localizedDescription)
-//        }
-        
         REST.loadStatements(onComplete: { (StatementModelAPI) in
 
             self.statementList = StatementModelAPI.statementList
@@ -51,9 +56,10 @@ class AccountViewController: UIViewController {
                 self.tableviewDetail.reloadData()
                 self.calculateBalance()                
             }
-                }) { (error) in
-                    print("Deu o erro aqui: \(error)")
-                }
+            
+        }) { (error) in
+                    print("Deu o erro aqui: \(error)")            
+        }
     }
     
 
@@ -68,7 +74,7 @@ class AccountViewController: UIViewController {
 }
 
 
-extension AccountViewController: UITableViewDataSource {
+extension AccountViewControllerMVC: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return statementList.count
@@ -84,7 +90,7 @@ extension AccountViewController: UITableViewDataSource {
 }
 
     
-extension AccountViewController: UITableViewDelegate {
+extension AccountViewControllerMVC: UITableViewDelegate {
         
     }
     

@@ -11,10 +11,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Login View Controller-->
+        <!--Login View ControllerMVC-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="LoginViewController" customModule="DesafioSantander" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="LoginViewControllerMVC" customModule="DesafioSantander" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -121,10 +121,10 @@
             </objects>
             <point key="canvasLocation" x="-103" y="-32"/>
         </scene>
-        <!--Account View Controller-->
+        <!--Account View ControllerMVC-->
         <scene sceneID="crX-kf-24c">
             <objects>
-                <viewController id="DSo-86-q1w" customClass="AccountViewController" customModule="DesafioSantander" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AccountViewControllerMVC" id="DSo-86-q1w" customClass="AccountViewControllerMVC" customModule="DesafioSantander" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="AHS-fc-G7A">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -306,6 +306,8 @@
                     </view>
                     <connections>
                         <outlet property="labelBalance" destination="Rrh-xI-bRx" id="sRe-uk-9Se"/>
+                        <outlet property="labelDataAccount" destination="ljQ-jU-mXH" id="KX3-Lh-1W9"/>
+                        <outlet property="labelNamePerson" destination="oGR-lr-2Ja" id="tPN-P7-rLc"/>
                         <outlet property="tableviewDetail" destination="D6A-9J-fq0" id="IVP-zU-Oa8"/>
                     </connections>
                 </viewController>
