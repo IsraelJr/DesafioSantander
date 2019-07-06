@@ -14,7 +14,8 @@ import UIKit
 
 protocol LoginPresentationLogic
 {
-  func presentSomething(response: Login.Something.Response)
+    func presentSomething(response: Login.Something.Response)
+    func showCustomAlert(with: String)
 }
 
 class LoginPresenter: LoginPresentationLogic
@@ -28,4 +29,32 @@ class LoginPresenter: LoginPresentationLogic
     let viewModel = Login.Something.ViewModel()
     viewController?.displaySomething(viewModel: viewModel)
   }
+    
+    func showCustomAlert(with: String) {
+        
+        var message: UIAlertController! = nil
+        var textAlert = ""
+        var textTitleAlert = ""
+        
+        switch with {
+        case "buttonLogin":
+            textTitleAlert = "Falha no Login"
+            textAlert = "Dados de Login Incorretos."
+            
+        case "buttonInfo":
+            textTitleAlert = "Informação"
+            textAlert = "Digite seu E-Mail ou CPF."
+            
+        default:
+            print("Valor Default identifica Sucesso")
+        }
+        
+        message = UIAlertController(title: textTitleAlert, message: textAlert, preferredStyle: .alert)
+        
+        message!.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
+            NSLog("The \"OK\" alert occured.")}))
+        
+        viewController?.failure(alertController: message)
+    }
+
 }

@@ -14,13 +14,37 @@ import UIKit
 
 protocol LoginDisplayLogic: class
 {
-  func displaySomething(viewModel: Login.Something.ViewModel)
+    func displaySomething(viewModel: Login.Something.ViewModel)
+    func success(userData: String) -> Void
+    func failure(alertController: UIAlertController) -> Void
 }
 
-class LoginViewController: UIViewController, LoginDisplayLogic
+class LoginViewController: UIViewController, LoginDisplayLogic, UITextFieldDelegate
 {
-  var interactor: LoginBusinessLogic?
-  var router: (NSObjectProtocol & LoginRoutingLogic & LoginDataPassing)?
+    @IBOutlet weak var textFieldUser:           UITextField!
+    @IBOutlet weak var textFieldPassword:       UITextField!
+    @IBOutlet weak var labelTextSave:           UILabel!
+    @IBOutlet weak var switchSaveUser:          UISwitch!
+    @IBOutlet weak var buttonLogin:             UIButton!
+    
+    @IBOutlet weak var lcTopLogo:               NSLayoutConstraint!
+    @IBOutlet weak var lcLeadingUser:           NSLayoutConstraint!
+    @IBOutlet weak var lcTrailingUser:          NSLayoutConstraint!
+    @IBOutlet weak var lcSpaceTextSaveSwitch:   NSLayoutConstraint!
+    @IBOutlet weak var lcTrailingButtonInfo:    NSLayoutConstraint!
+    
+    var valueInitialLcTopLogo:                  CGFloat!
+    var valueInitialLcLeadingUser:              CGFloat!
+    var valueInitialLcTrailingUser:             CGFloat!
+    var valueInitialLcSpaceTextSaveSwitch:      CGFloat!
+    var valueInitialButtonLogin:                CGFloat!
+    var valueInitiallcTrailingButtonInfo:       CGFloat!
+    
+    var timer: Timer?
+    var interactor: LoginBusinessLogic?
+    var router: (NSObjectProtocol & LoginRoutingLogic & LoginDataPassing)?
+    
+    let ud = UserDefaults.standard
 
   // MARK: Object lifecycle
   
@@ -44,32 +68,50 @@ class LoginViewController: UIViewController, LoginDisplayLogic
     let interactor = LoginInteractor()
     let presenter = LoginPresenter()
     let router = LoginRouter()
+    
     viewController.interactor = interactor
     viewController.router = router
     interactor.presenter = presenter
     presenter.viewController = viewController
     router.viewController = viewController
     router.dataStore = interactor
+    
   }
   
   // MARK: Routing
   
-  override func prepare(for segue: UIStoryboardSegue, sender: Any?)
-  {
-    if let scene = segue.identifier {
-      let selector = NSSelectorFromString("routeTo\(scene)WithSegue:")
-      if let router = router, router.responds(to: selector) {
-        router.perform(selector, with: segue)
-      }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?)
+    {
+        if let scene = segue.identifier {
+          let selector = NSSelectorFromString("routeTo\(scene)WithSegue:")
+          if let router = router, router.responds(to: selector) {
+            router.perform(selector, with: segue)
+          }
+        }
+        
+        if segue.destination is AccountViewControllerMVC {
+            let vc = segue.destination as? AccountViewControllerMVC
+            if textFieldUser.text == "israel.junior2111@gmail.com" {
+                vc?.nameUser        = "Israel Alves Dos Santos Junior"
+                vc?.dataAccount     = "0642 / 01.035063-2"
+            }
+            vc?.passwordUser    = textFieldPassword.text!
+        }
+        saveUserDefault()
     }
-  }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
+    }
+    
   
   // MARK: View lifecycle
   
-  override func viewDidLoad()
-  {
+  override func viewDidLoad() {
     super.viewDidLoad()
-    doSomething()
+//    doSomething()
+    initializeLayout()
+    initializeDataLogin()
   }
   
   // MARK: Do something
@@ -86,4 +128,124 @@ class LoginViewController: UIViewController, LoginDisplayLogic
   {
     //nameTextField.text = viewModel.name
   }
-}
+    
+ func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+    if textField == textFieldUser {
+        textFieldPassword.becomeFirstResponder()
+    } else {
+        view.endEditing(true)
+        actionButtons(buttonLogin)
+    }
+    return true
+ }
+    
+ func initializeLayout() {
+        
+    valueInitialLcTopLogo               = lcTopLogo.constant
+    valueInitialLcLeadingUser           = lcLeadingUser.constant
+    valueInitialLcTrailingUser          = lcTrailingUser.constant
+    valueInitialLcSpaceTextSaveSwitch   = lcSpaceTextSaveSwitch.constant
+    valueInitialButtonLogin             = buttonLogin.alpha
+    valueInitiallcTrailingButtonInfo    = lcTrailingButtonInfo.constant
+    
+    lcTopLogo.constant              = -100
+    lcLeadingUser.constant          = 17
+    lcTrailingUser.constant         = 270
+    lcTrailingButtonInfo.constant   = lcTrailingUser.constant
+    lcSpaceTextSaveSwitch.constant  = lcLeadingUser.constant
+    buttonLogin.alpha               = 0.0
+    
+    buttonLogin.layer.cornerRadius = 4
+    
+    view.layoutIfNeeded()
+    
+    self.switchSaveUser.isOn = self.ud.bool(forKey: "saveUser")
+    
+    timer?.invalidate()
+    timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false) { (timer) in
+        self.animation()
+    }
+ }
+    
+ func initializeDataLogin() {
+        
+    timer = Timer.scheduledTimer(withTimeInterval: 1.5, repeats: false) { (timer) in
+        self.textFieldUser.text = self.ud.string(forKey: "user")
+    }
+
+ }
+    
+ func animation() {
+    UIView.animate(withDuration: 1.5){
+        self.lcTopLogo.constant             = self.valueInitialLcTopLogo
+        self.lcLeadingUser.constant         = self.valueInitialLcLeadingUser
+        self.lcTrailingUser.constant        = self.valueInitialLcTrailingUser
+        self.lcTrailingButtonInfo.constant  = self.valueInitiallcTrailingButtonInfo
+        self.lcSpaceTextSaveSwitch.constant = self.valueInitialLcSpaceTextSaveSwitch
+        self.buttonLogin.alpha              = self.valueInitialButtonLogin
+            
+        self.view.layoutIfNeeded()
+    }
+ }
+    
+ @IBAction func actionButtons(_ sender: UIButton) {
+    
+    switch String(sender.restorationIdentifier!) {
+    case "buttonLogin":
+        if let userValue = self.textFieldUser.text, let passwordValue = self.textFieldPassword.text {
+            let isValid = interactor?.validateLogin(user: userValue, password: passwordValue)
+            if isValid! {
+                    self.success(userData: "")
+            }
+        }
+    case "buttonInfo":
+         interactor?.presentInfo()
+    default:
+            print("t")
+    }
+    
+//
+//    if sender.restorationIdentifier == "buttonLogin" {
+////        if (isValidEmail(emailUser: textFieldUser.text ?? "") || isValidCPF(cpfUser: textFieldUser.text ?? "")) &&
+////           (isValidPassword(passwordUser: textFieldPassword.text ?? "") || textFieldPassword.text == "1234") {
+////
+//            dismiss(animated: true, completion: nil)
+//
+//            performSegue(withIdentifier: "segueSceneAccount", sender: nil)
+//
+//            let viewControllerAccount = storyboard?.instantiateViewController(withIdentifier: "AccountViewControllerID") as! AccountViewControllerMVC
+//
+//            navigationController?.pushViewController(viewControllerAccount, animated: true)
+//
+//        } else {
+//            showAlert(sender.restorationIdentifier!)
+//        }
+//    } else {
+//        print("Botão de informação")
+//        showAlert(sender.restorationIdentifier!)
+//    }
+ }
+
+    func failure(alertController: UIAlertController) {
+        self.present(alertController, animated: true, completion: nil)
+    }
+
+    func success(userData: String) {
+        dismiss(animated: true, completion: nil)
+        self.performSegue(withIdentifier: "segueSceneAccount", sender: nil)
+    }
+  
+    func saveUserDefault() {
+        
+        if !switchSaveUser.isOn {
+            textFieldUser.text = nil
+        }
+    
+    ud.set(textFieldUser.text, forKey: "user")
+    ud.set(switchSaveUser.isOn, forKey: "saveUser")
+    textFieldPassword.text = nil
+        
+    }
+
+
+ }

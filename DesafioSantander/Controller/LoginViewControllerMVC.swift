@@ -142,7 +142,6 @@ class LoginViewControllerMVC: UIViewController, UITextFieldDelegate {
                 
                 let viewControllerAccount = storyboard?.instantiateViewController(withIdentifier: "AccountViewControllerMVC") as! AccountViewControllerMVC
                 
-//                viewControllerAccount.labelNamePerson.text = textFieldUser.text ?? "Teste"
                 navigationController?.pushViewController(viewControllerAccount, animated: true)
                 
             } else {

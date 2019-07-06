@@ -14,7 +14,9 @@ import UIKit
 
 protocol LoginBusinessLogic
 {
-  func doSomething(request: Login.Something.Request)
+    func doSomething(request: Login.Something.Request)
+    func validateLogin(user: String, password: String) -> Bool
+    func presentInfo()
 }
 
 protocol LoginDataStore
@@ -24,18 +26,36 @@ protocol LoginDataStore
 
 class LoginInteractor: LoginBusinessLogic, LoginDataStore
 {
-  var presenter: LoginPresentationLogic?
-  var worker: LoginWorker?
-  //var name: String = ""
-  
-  // MARK: Do something
-  
-  func doSomething(request: Login.Something.Request)
-  {
+    var presenter: LoginPresentationLogic?
+    var worker: LoginWorker?
+    //var name: String = ""
+
+    // MARK: Do something
+
+    func doSomething(request: Login.Something.Request)
+    {
     worker = LoginWorker()
     worker?.doSomeWork()
-    
+
     let response = Login.Something.Response()
     presenter?.presentSomething(response: response)
-  }
+    }
+    
+    func validateLogin(user: String, password: String) -> Bool {
+        if  (isValidEmail(emailUser: user) || isValidCPF(cpfUser: user))
+            &&
+            (isValidPassword(passwordUser: password) || password == "1234")
+        {
+            return true
+        }
+        
+        presenter?.showCustomAlert(with: "buttonLogin")        
+        return false
+    }
+    
+    func presentInfo(){
+        presenter?.showCustomAlert(with: "buttonInfo")
+    }
+    
+    
 }

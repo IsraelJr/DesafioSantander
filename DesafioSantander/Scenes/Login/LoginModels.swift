@@ -29,3 +29,18 @@ enum Login
     }
   }
 }
+
+//struct LoginModels: Codable {
+//    let userAccount: UserAccount
+//    let error: Error
+//}
+//
+//struct UserAccount: Codable {
+//    let user: String
+//    let password: String
+//}
+//
+//struct Error: Codable {
+//    var message: String?
+//}
+

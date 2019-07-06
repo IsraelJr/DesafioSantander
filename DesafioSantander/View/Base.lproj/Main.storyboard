@@ -11,10 +11,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Login View ControllerMVC-->
+        <!--Login View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="LoginViewControllerMVC" customModule="DesafioSantander" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="LoginViewController" customModule="DesafioSantander" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -105,15 +105,15 @@
                     </view>
                     <connections>
                         <outlet property="buttonLogin" destination="C6N-dV-owb" id="3DB-3k-8Z6"/>
-                        <outlet property="labelTextSave" destination="B8X-Us-f5r" id="heY-wW-Qdv"/>
+                        <outlet property="labelTextSave" destination="B8X-Us-f5r" id="hLg-Fc-vQ2"/>
                         <outlet property="lcLeadingUser" destination="Uwa-TX-dgF" id="drZ-GF-Gju"/>
                         <outlet property="lcSpaceTextSaveSwitch" destination="WC7-Bi-VrP" id="oiH-gf-YtS"/>
                         <outlet property="lcTopLogo" destination="NCh-Si-bKr" id="FJc-tA-cPt"/>
                         <outlet property="lcTrailingButtonInfo" destination="vaT-9t-Ysh" id="XqU-MC-gcO"/>
                         <outlet property="lcTrailingUser" destination="jlX-Qi-bRE" id="UFD-q1-29w"/>
-                        <outlet property="switchSaveUser" destination="ld2-CG-EVb" id="ge2-Bb-rCH"/>
-                        <outlet property="textFieldPassword" destination="zIN-uf-Ww1" id="Rrf-e5-MSz"/>
-                        <outlet property="textFieldUser" destination="buz-Di-P30" id="yUT-9p-gfc"/>
+                        <outlet property="switchSaveUser" destination="ld2-CG-EVb" id="a6K-2E-tb2"/>
+                        <outlet property="textFieldPassword" destination="zIN-uf-Ww1" id="Gvy-Wf-wbe"/>
+                        <outlet property="textFieldUser" destination="buz-Di-P30" id="ZV1-Yu-Nsk"/>
                         <segue destination="DSo-86-q1w" kind="show" identifier="segueSceneAccount" id="acY-Rr-olh"/>
                     </connections>
                 </viewController>
@@ -124,7 +124,7 @@
         <!--Account View ControllerMVC-->
         <scene sceneID="crX-kf-24c">
             <objects>
-                <viewController storyboardIdentifier="AccountViewControllerMVC" id="DSo-86-q1w" customClass="AccountViewControllerMVC" customModule="DesafioSantander" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AccountViewControllerID" id="DSo-86-q1w" customClass="AccountViewControllerMVC" customModule="DesafioSantander" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="AHS-fc-G7A">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
