@@ -14,7 +14,9 @@ import UIKit
 
 protocol StatementPresentationLogic
 {
-  func presentSomething(response: Statement.Something.Response)
+    func presentSomething(response: Statement.Something.Response)
+    func presentTeste(extract: [StatementList])
+    func presentDataAccount(value: Double)
 }
 
 class StatementPresenter: StatementPresentationLogic
@@ -28,4 +30,12 @@ class StatementPresenter: StatementPresentationLogic
     let viewModel = Statement.Something.ViewModel()
     viewController?.displaySomething(viewModel: viewModel)
   }
+    
+    func presentTeste(extract: [StatementList]) {
+        viewController?.displayTeste(value: extract)
+    }
+    
+    func presentDataAccount(value: Double) {
+        viewController?.dataAccount(valueBalance: value)
+    }
 }

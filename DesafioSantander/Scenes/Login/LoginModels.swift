@@ -18,14 +18,14 @@ enum Login
   
   enum Something
   {
-    struct Request
-    {
+    struct Request: Codable {
+        let userAccount: UserAccount
     }
-    struct Response
-    {
+    struct Response {
     }
-    struct ViewModel
-    {
+    struct ViewModel: Codable {
+        let user: String
+        let password: String
     }
   }
 }

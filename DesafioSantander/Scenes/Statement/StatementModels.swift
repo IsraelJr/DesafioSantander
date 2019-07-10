@@ -29,3 +29,31 @@ enum Statement
     }
   }
 }
+
+//struct StatementModels: Codable {
+//    let statementList: [StatementList]
+//    let error: Error?
+//    
+//    struct StatementList: Codable {
+//        let title: String
+//        let desc: String
+//        let date: String
+//        let value: Double
+//        
+//        var valueFormatted: String {
+//            return "R$ \(value)"
+//        }
+//        
+//        var dateFormatted: String {
+//            let dateFormatter = DateFormatter()
+//            dateFormatter.dateFormat = "yyyy-MM-dd"
+//            let date = dateFormatter.date(from: self.date) // replace Date String
+//            dateFormatter.dateFormat = "dd/MM/yyyy"
+//            return dateFormatter.string(from: date!)
+//        }
+//    }
+//    struct Error: Codable {
+//        var message: String?
+//    }
+//    
+//}

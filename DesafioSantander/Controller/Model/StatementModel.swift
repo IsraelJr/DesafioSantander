@@ -10,7 +10,7 @@ import Foundation
 
 struct StatementModel: Codable {
     let statementList: [StatementList]
-//    let error: String
+//    let error: Error?
 }
 
 struct StatementList: Codable {
@@ -30,4 +30,6 @@ struct StatementList: Codable {
         dateFormatter.dateFormat = "dd/MM/yyyy"
         return dateFormatter.string(from: date!)
     }
+    
+    
 }

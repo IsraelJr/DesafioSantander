@@ -60,8 +60,9 @@ class REST {
                     }
                     do {
                         let statementModel = try JSONDecoder().decode(StatementModel.self, from: data)
-                        print("Extrato: \(statementModel.statementList[1].value)")
+                        print("Extrato do dia: \(statementModel.statementList[1].value)")
                         onComplete(statementModel)
+                        print("depois do onComplete")
                     } catch {
                         print("Erro do JSON 2: \(error.localizedDescription)")
                         onError(.invalidJson)

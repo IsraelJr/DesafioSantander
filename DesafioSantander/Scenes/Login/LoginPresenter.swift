@@ -12,10 +12,18 @@
 
 import UIKit
 
+enum InfoAlert: String {
+    case FailureLogin   = "Falha no Login"
+    case Info           = "Informação"
+    case Attention      = "Atenção"
+}
+
 protocol LoginPresentationLogic
 {
     func presentSomething(response: Login.Something.Response)
-    func showCustomAlert(with: String)
+    func dataInitial(dataSwitch: Bool, dataUser: String)
+    func showCustomAlert(alertTo: String)
+    func login(userData: Login.Something.ViewModel)
 }
 
 class LoginPresenter: LoginPresentationLogic
@@ -24,29 +32,34 @@ class LoginPresenter: LoginPresentationLogic
   
   // MARK: Do something
   
-  func presentSomething(response: Login.Something.Response)
-  {
-    let viewModel = Login.Something.ViewModel()
-    viewController?.displaySomething(viewModel: viewModel)
-  }
+    func presentSomething(response: Login.Something.Response)
+    {
+//        let viewModel = Login.Something.ViewModel()
+//        viewController?.displaySomething(viewModel: viewModel)
+    }
     
-    func showCustomAlert(with: String) {
+    func dataInitial(dataSwitch: Bool, dataUser: String) {
+        viewController?.initializeDataLogin(switchLogin: dataSwitch, user: dataUser)
+    }
+    
+    func showCustomAlert(alertTo: String) {
         
         var message: UIAlertController! = nil
         var textAlert = ""
         var textTitleAlert = ""
         
-        switch with {
+        switch alertTo {
         case "buttonLogin":
-            textTitleAlert = "Falha no Login"
+            textTitleAlert = InfoAlert.FailureLogin.rawValue
             textAlert = "Dados de Login Incorretos."
             
         case "buttonInfo":
-            textTitleAlert = "Informação"
+            textTitleAlert = InfoAlert.Info.rawValue
             textAlert = "Digite seu E-Mail ou CPF."
             
         default:
-            print("Valor Default identifica Sucesso")
+            textTitleAlert = InfoAlert.Attention.rawValue
+            textAlert = "Acão não identificada!"
         }
         
         message = UIAlertController(title: textTitleAlert, message: textAlert, preferredStyle: .alert)
@@ -57,4 +70,8 @@ class LoginPresenter: LoginPresentationLogic
         viewController?.failure(alertController: message)
     }
 
+    func login(userData: Login.Something.ViewModel){
+        print("presenter login é: \(userData.password)")
+        viewController?.success(userData: userData)
+    }
 }

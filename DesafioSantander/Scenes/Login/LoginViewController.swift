@@ -15,8 +15,9 @@ import UIKit
 protocol LoginDisplayLogic: class
 {
     func displaySomething(viewModel: Login.Something.ViewModel)
-    func success(userData: String) -> Void
+    func success(userData: Login.Something.ViewModel) -> Void
     func failure(alertController: UIAlertController) -> Void
+    func initializeDataLogin(switchLogin: Bool, user: String)
 }
 
 class LoginViewController: UIViewController, LoginDisplayLogic, UITextFieldDelegate
@@ -45,7 +46,6 @@ class LoginViewController: UIViewController, LoginDisplayLogic, UITextFieldDeleg
     var router: (NSObjectProtocol & LoginRoutingLogic & LoginDataPassing)?
     
     let ud = UserDefaults.standard
-
   // MARK: Object lifecycle
   
   override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?)
@@ -96,8 +96,9 @@ class LoginViewController: UIViewController, LoginDisplayLogic, UITextFieldDeleg
                 vc?.dataAccount     = "0642 / 01.035063-2"
             }
             vc?.passwordUser    = textFieldPassword.text!
+            
         }
-        saveUserDefault()
+        
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -111,7 +112,7 @@ class LoginViewController: UIViewController, LoginDisplayLogic, UITextFieldDeleg
     super.viewDidLoad()
 //    doSomething()
     initializeLayout()
-    initializeDataLogin()
+    interactor?.loadDataUserDefault()    
   }
   
   // MARK: Do something
@@ -120,8 +121,8 @@ class LoginViewController: UIViewController, LoginDisplayLogic, UITextFieldDeleg
   
   func doSomething()
   {
-    let request = Login.Something.Request()
-    interactor?.doSomething(request: request)
+//    let request = Login.Something.Request()
+//    interactor?.doSomething(request: request)
   }
   
   func displaySomething(viewModel: Login.Something.ViewModel)
@@ -159,7 +160,6 @@ class LoginViewController: UIViewController, LoginDisplayLogic, UITextFieldDeleg
     
     view.layoutIfNeeded()
     
-    self.switchSaveUser.isOn = self.ud.bool(forKey: "saveUser")
     
     timer?.invalidate()
     timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false) { (timer) in
@@ -167,11 +167,12 @@ class LoginViewController: UIViewController, LoginDisplayLogic, UITextFieldDeleg
     }
  }
     
- func initializeDataLogin() {
+    func initializeDataLogin(switchLogin: Bool, user: String) {
         
-    timer = Timer.scheduledTimer(withTimeInterval: 1.5, repeats: false) { (timer) in
-        self.textFieldUser.text = self.ud.string(forKey: "user")
-    }
+        self.switchSaveUser.isOn = switchLogin
+        timer = Timer.scheduledTimer(withTimeInterval: 1.5, repeats: false) { (timer) in
+            self.textFieldUser.text = user
+        }
 
  }
     
@@ -193,59 +194,27 @@ class LoginViewController: UIViewController, LoginDisplayLogic, UITextFieldDeleg
     switch String(sender.restorationIdentifier!) {
     case "buttonLogin":
         if let userValue = self.textFieldUser.text, let passwordValue = self.textFieldPassword.text {
-            let isValid = interactor?.validateLogin(user: userValue, password: passwordValue)
-            if isValid! {
-                    self.success(userData: "")
-            }
+            interactor?.validateLogin(user: userValue, password: passwordValue)
         }
     case "buttonInfo":
-         interactor?.presentInfo()
+        interactor?.presentInfo(with: sender.restorationIdentifier!)
     default:
-            print("t")
+        interactor?.presentInfo(with: sender.restorationIdentifier ?? "")
     }
-    
-//
-//    if sender.restorationIdentifier == "buttonLogin" {
-////        if (isValidEmail(emailUser: textFieldUser.text ?? "") || isValidCPF(cpfUser: textFieldUser.text ?? "")) &&
-////           (isValidPassword(passwordUser: textFieldPassword.text ?? "") || textFieldPassword.text == "1234") {
-////
-//            dismiss(animated: true, completion: nil)
-//
-//            performSegue(withIdentifier: "segueSceneAccount", sender: nil)
-//
-//            let viewControllerAccount = storyboard?.instantiateViewController(withIdentifier: "AccountViewControllerID") as! AccountViewControllerMVC
-//
-//            navigationController?.pushViewController(viewControllerAccount, animated: true)
-//
-//        } else {
-//            showAlert(sender.restorationIdentifier!)
-//        }
-//    } else {
-//        print("Botão de informação")
-//        showAlert(sender.restorationIdentifier!)
-//    }
+
  }
 
     func failure(alertController: UIAlertController) {
         self.present(alertController, animated: true, completion: nil)
     }
 
-    func success(userData: String) {
+    func success(userData: Login.Something.ViewModel) {
         dismiss(animated: true, completion: nil)
-        self.performSegue(withIdentifier: "segueSceneAccount", sender: nil)
+        self.interactor?.saveData(button: switchSaveUser, user: textFieldUser, password: textFieldPassword)
+        self.performSegue(withIdentifier: "segueSceneAccount", sender: userData)
+        print("viewcontroller login é: \(userData.password)")
+        textFieldPassword.text = nil
     }
   
-    func saveUserDefault() {
-        
-        if !switchSaveUser.isOn {
-            textFieldUser.text = nil
-        }
     
-    ud.set(textFieldUser.text, forKey: "user")
-    ud.set(switchSaveUser.isOn, forKey: "saveUser")
-    textFieldPassword.text = nil
-        
-    }
-
-
  }

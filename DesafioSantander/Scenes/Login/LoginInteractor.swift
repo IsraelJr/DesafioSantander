@@ -15,8 +15,10 @@ import UIKit
 protocol LoginBusinessLogic
 {
     func doSomething(request: Login.Something.Request)
-    func validateLogin(user: String, password: String) -> Bool
-    func presentInfo()
+    func validateLogin(user: String, password: String)
+    func presentInfo(with: String)
+    func saveData(button: UISwitch, user: UITextField, password: UITextField)
+    func loadDataUserDefault()
 }
 
 protocol LoginDataStore
@@ -27,35 +29,41 @@ protocol LoginDataStore
 class LoginInteractor: LoginBusinessLogic, LoginDataStore
 {
     var presenter: LoginPresentationLogic?
-    var worker: LoginWorker?
+    var worker = LoginWorker()
     //var name: String = ""
 
     // MARK: Do something
 
     func doSomething(request: Login.Something.Request)
     {
-    worker = LoginWorker()
-    worker?.doSomeWork()
+    worker.doSomeWork()
 
     let response = Login.Something.Response()
     presenter?.presentSomething(response: response)
     }
     
-    func validateLogin(user: String, password: String) -> Bool {
+    func validateLogin(user: String, password: String) {
+        
         if  (isValidEmail(emailUser: user) || isValidCPF(cpfUser: user))
             &&
             (isValidPassword(passwordUser: password) || password == "1234")
         {
-            return true
+            presenter?.login(userData: Login.Something.ViewModel(user: user, password: password))
+        } else {
+            presenter?.showCustomAlert(alertTo: "buttonLogin")
         }
-        
-        presenter?.showCustomAlert(with: "buttonLogin")        
-        return false
     }
     
-    func presentInfo(){
-        presenter?.showCustomAlert(with: "buttonInfo")
+    func presentInfo(with: String){
+        presenter?.showCustomAlert(alertTo: with)
     }
     
+    func saveData(button: UISwitch, user: UITextField, password: UITextField) {
+        worker.saveUserDefault(button: button, user: user)
+    }
+    
+    func loadDataUserDefault() {
+         presenter?.dataInitial(dataSwitch: worker.loadUserDefaultBool(), dataUser: worker.loadUserDefault())
+    }
     
 }

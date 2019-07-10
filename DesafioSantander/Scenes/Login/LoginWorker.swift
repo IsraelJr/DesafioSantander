@@ -12,9 +12,34 @@
 
 import UIKit
 
-class LoginWorker
-{
-  func doSomeWork()
-  {
-  }
+
+class LoginWorker {
+    
+    let ud = UserDefaults.standard
+    
+    func doSomeWork() {
+      
+    }
+    
+    func saveUserDefault(button: UISwitch, user: UITextField) {
+
+        if !button.isOn {
+            user.text = nil
+        }
+
+        ud.set(user.text, forKey: "user")
+        ud.set(button.isOn, forKey: "saveUser")
+
+    }
+
+    func loadUserDefault() -> String {
+        return self.ud.string(forKey: "user") ?? ""
+    }
+    
+    func loadUserDefaultBool() -> Bool {
+        print("Carregamento do switch é: \(self.ud.bool(forKey: "saveUser"))")
+        return self.ud.bool(forKey: "saveUser")
+    }
+    
+    
 }

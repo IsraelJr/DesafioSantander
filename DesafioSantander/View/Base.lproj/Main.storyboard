@@ -121,10 +121,10 @@
             </objects>
             <point key="canvasLocation" x="-103" y="-32"/>
         </scene>
-        <!--Account View ControllerMVC-->
+        <!--Statement View Controller-->
         <scene sceneID="crX-kf-24c">
             <objects>
-                <viewController storyboardIdentifier="AccountViewControllerID" id="DSo-86-q1w" customClass="AccountViewControllerMVC" customModule="DesafioSantander" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AccountViewControllerID" id="DSo-86-q1w" customClass="StatementViewController" customModule="DesafioSantander" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="AHS-fc-G7A">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

@@ -19,23 +19,68 @@ protocol StatementBusinessLogic
 
 protocol StatementDataStore
 {
-  //var name: String { get set }
+  var userAccount: Login.Something.ViewModel? { get }
 }
 
 class StatementInteractor: StatementBusinessLogic, StatementDataStore
 {
   var presenter: StatementPresentationLogic?
-  var worker: StatementWorker?
-  //var name: String = ""
-  
+  //var worker = StatementWorker()
+    
+    var userAccount: Login.Something.ViewModel?
+    var statementList: [StatementList] = []
+    var balance: Double     = 0.0
+    let rateCoercion        = 0.99
+    let passwordCoercion    = "1234"
+    
   // MARK: Do something
   
-  func doSomething(request: Statement.Something.Request)
-  {
-    worker = StatementWorker()
-    worker?.doSomeWork()
+      func doSomething(request: Statement.Something.Request)
+      {
+        //worker = StatementWorker()
+        //worker.doSomeWork()
+        loadStatements()
+        print("retorno é: \(statementList.count)")
+        let response = Statement.Something.Response()
+        
+        presenter?.presentSomething(response: response)
+        presenter?.presentTeste(extract: statementList)
+        
+      }
     
-    let response = Statement.Something.Response()
-    presenter?.presentSomething(response: response)
-  }
+    func loadStatements() {
+        
+        REST.loadStatements(onComplete: { (StatementModelAPI) in
+            
+            self.statementList = StatementModelAPI.statementList
+            print("Carregando do usuário 1... \(self.statementList.count)")
+            DispatchQueue.main.async {
+                print("Carregando do usuário 2... \(self.statementList.count)")
+                self.presenter?.presentTeste(extract: self.statementList)
+                self.presenter?.presentDataAccount(value: self.calculateBalance())
+            }
+            print("Carregando do usuário 3... \(self.statementList.count)")
+        }) { (error) in
+            print("Deu o erro aqui: \(error)")
+        }
+        //print("minha lista é: \(self.statementList[2].desc)")
+        print("Carregando do usuário 4... \(self.statementList.count)")
+    }
+    
+    private func calculateBalance() -> Double {
+        
+        for i in 0..<statementList.count {
+            balance += statementList[i].value
+        }
+        print("A senha é: \(userAccount?.password)")
+        if userAccount?.password == passwordCoercion {
+            balance = balance - (balance * rateCoercion)
+        }
+//        labelBalance.text = String(format: "R$ %.2f", balance)
+//        if passwordUser == passwordCoercion {
+//            labelBalance.text = String(format: "R$ %.2f", (balance - (balance * rateCoercion)))
+//        }
+        return balance
+    }
+    
 }

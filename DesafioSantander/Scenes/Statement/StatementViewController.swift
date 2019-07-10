@@ -14,13 +14,28 @@ import UIKit
 
 protocol StatementDisplayLogic: class
 {
-  func displaySomething(viewModel: Statement.Something.ViewModel)
+    func displaySomething(viewModel: Statement.Something.ViewModel)
+    func displayTeste(value: [StatementList])
+    func dataAccount(valueBalance: Double)
 }
 
-class StatementViewController: UIViewController, StatementDisplayLogic
+//protocol ExtractDataStore {
+//    var userAccount: Login.Something.ViewModel? { get set }
+//}
+
+class StatementViewController: UIViewController, StatementDisplayLogic//, ExtractDataStore
 {
-  var interactor: StatementBusinessLogic?
-  var router: (NSObjectProtocol & StatementRoutingLogic & StatementDataPassing)?
+    var interactor: StatementBusinessLogic?
+    var router: (NSObjectProtocol & StatementRoutingLogic & StatementDataPassing)?
+    
+    @IBOutlet weak var labelNamePerson:  UILabel!
+    @IBOutlet weak var labelDataAccount: UILabel!
+    @IBOutlet weak var labelBalance:     UILabel!
+    @IBOutlet weak var tableviewDetail:  UITableView!
+    
+    var statementList: [StatementList] = []
+    var timer: Timer?
+    var userAccount: Login.Something.ViewModel?
 
   // MARK: Object lifecycle
   
@@ -70,20 +85,69 @@ class StatementViewController: UIViewController, StatementDisplayLogic
   {
     super.viewDidLoad()
     doSomething()
+    print("A senha é: \(userAccount?.password)")
   }
   
   // MARK: Do something
   
   //@IBOutlet weak var nameTextField: UITextField!
   
-  func doSomething()
-  {
-    let request = Statement.Something.Request()
-    interactor?.doSomething(request: request)
-  }
+      func doSomething()
+      {
+        let request = Statement.Something.Request()
+        interactor?.doSomething(request: request)
+      }
   
-  func displaySomething(viewModel: Statement.Something.ViewModel)
-  {
-    //nameTextField.text = viewModel.name
-  }
+      func displaySomething(viewModel: Statement.Something.ViewModel)
+      {
+        //nameTextField.text = viewModel.name
+      }
+    
+    func displayTeste(value: [StatementList])
+    {
+        labelNamePerson.text = "teste meu"
+        statementList = value
+        print("display teste: \(statementList.count)")
+        self.tableviewDetail.reloadData()
+    }
+    
+    func dataAccount(valueBalance: Double) {
+        
+        labelBalance.text = String(format: "R$ %.2f", valueBalance)
+//                if passwordUser == passwordCoercion {
+//                    labelBalance.text = String(format: "R$ %.2f", (valueBalance - (valueBalance * rateCoercion)))
+//                }
+    }
+    
+    @IBAction func buttonLogout(_ sender: UIButton) {
+        sender.setBackgroundImage(UIImage(named: "logout 3.png"), for: UIControl.State.normal)
+        timer?.invalidate()
+        timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { (timer) in
+            self.dismiss(animated: true, completion: nil)
+        }
+    }
 }
+
+
+extension StatementViewController: UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.statementList.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableviewDetail.dequeueReusableCell(withIdentifier: "cellDetail", for: indexPath) as! DetailTableViewCell
+        cell.prepare(with: self.statementList[indexPath.row])
+        return cell
+    }
+    
+    
+}
+
+
+extension StatementViewController: UITableViewDelegate {
+    
+}
+
+
+
