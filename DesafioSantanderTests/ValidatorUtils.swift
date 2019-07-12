@@ -7,25 +7,44 @@
 //
 
 import XCTest
+@testable import DesafioSantander
 
 class ValidatorUtils: XCTestCase {
 
     override func setUp() {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        print("função setUp")
     }
 
     override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+        print("função tearDown")
     }
 
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    func test_isValidEmail() {
+        let email = "asdf@gmail.com"
+        let result = isValidEmail(emailUser: email)
+        XCTAssertTrue(result)
+        print("função test_isValidEmail")
     }
-
+    
+    func test_isValidCpf() {
+        let cpf = "12345678901"
+        let result = isValidCPF(cpfUser: cpf)
+        XCTAssertTrue(result)
+        print("função test_isValidCpf")
+    }
+    
+    func test_isValidPassword() {
+        let password = "A!1"
+        let result = isValidPassword(passwordUser: password)
+        XCTAssertTrue(result)
+        print("função test_isValidPassword")
+    }
+    
     func testPerformanceExample() {
+        print("função testPerformanceExample")
         // This is an example of a performance test case.
         self.measure {
+            print("função testPerformanceExample measure")
             // Put the code you want to measure the time of here.
         }
     }

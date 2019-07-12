@@ -92,7 +92,7 @@ class LoginViewController: UIViewController, LoginDisplayLogic, UITextFieldDeleg
         
         if segue.destination is StatementViewController {
             let vc = segue.destination as? StatementViewController
-            vc?.passwordUser    = textFieldPassword.text!
+            vc?.passwordUser = textFieldPassword.text!
         }        
     }
     
@@ -130,14 +130,14 @@ class LoginViewController: UIViewController, LoginDisplayLogic, UITextFieldDeleg
     valueInitialButtonLogin             = buttonLogin.alpha
     valueInitiallcTrailingButtonInfo    = lcTrailingButtonInfo.constant
     
-    lcTopLogo.constant              = -100
-    lcLeadingUser.constant          = 17
-    lcTrailingUser.constant         = 270
-    lcTrailingButtonInfo.constant   = lcTrailingUser.constant
-    lcSpaceTextSaveSwitch.constant  = lcLeadingUser.constant
-    buttonLogin.alpha               = 0.0
+    lcTopLogo.constant                  = -100
+    lcLeadingUser.constant              = 17
+    lcTrailingUser.constant             = 270
+    lcTrailingButtonInfo.constant       = lcTrailingUser.constant
+    lcSpaceTextSaveSwitch.constant      = lcLeadingUser.constant
+    buttonLogin.alpha                   = 0.0
     
-    buttonLogin.layer.cornerRadius = 4
+    buttonLogin.layer.cornerRadius      = 4
     
     view.layoutIfNeeded()
     
@@ -194,7 +194,7 @@ class LoginViewController: UIViewController, LoginDisplayLogic, UITextFieldDeleg
         dismiss(animated: true, completion: nil)
         self.interactor?.saveData(button: switchSaveUser, user: textFieldUser)
         self.performSegue(withIdentifier: "segueSceneAccount", sender: userData)
-        textFieldPassword.text = nil
+        textFieldPassword.text?.removeAll()
     }
   
     

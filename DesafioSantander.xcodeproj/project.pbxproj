@@ -35,6 +35,8 @@
 		47CEC36322D80E5700DF4A87 /* DesafioSantanderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47CEC36222D80E5700DF4A87 /* DesafioSantanderTests.swift */; };
 		47CEC37122D80FB900DF4A87 /* TestsValidationUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47CEC37022D80FB900DF4A87 /* TestsValidationUtil.swift */; };
 		47CEC37922D8108100DF4A87 /* ValidatorUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47CEC37822D8108100DF4A87 /* ValidatorUtils.swift */; };
+		47CEC37B22D8D76600DF4A87 /* LoginViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47CEC37A22D8D76600DF4A87 /* LoginViewControllerTests.swift */; };
+		47CEC37D22D8DD7B00DF4A87 /* LoginInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47CEC37C22D8DD7B00DF4A87 /* LoginInteractorTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -89,6 +91,8 @@
 		47CEC37022D80FB900DF4A87 /* TestsValidationUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestsValidationUtil.swift; sourceTree = "<group>"; };
 		47CEC37222D80FB900DF4A87 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		47CEC37822D8108100DF4A87 /* ValidatorUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidatorUtils.swift; sourceTree = "<group>"; };
+		47CEC37A22D8D76600DF4A87 /* LoginViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewControllerTests.swift; sourceTree = "<group>"; };
+		47CEC37C22D8DD7B00DF4A87 /* LoginInteractorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginInteractorTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -228,6 +232,8 @@
 		47CEC36122D80E5700DF4A87 /* DesafioSantanderTests */ = {
 			isa = PBXGroup;
 			children = (
+				47CEC37C22D8DD7B00DF4A87 /* LoginInteractorTests.swift */,
+				47CEC37A22D8D76600DF4A87 /* LoginViewControllerTests.swift */,
 				47CEC37822D8108100DF4A87 /* ValidatorUtils.swift */,
 				47CEC36222D80E5700DF4A87 /* DesafioSantanderTests.swift */,
 				47CEC36422D80E5700DF4A87 /* Info.plist */,
@@ -404,6 +410,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				47CEC37D22D8DD7B00DF4A87 /* LoginInteractorTests.swift in Sources */,
+				47CEC37B22D8D76600DF4A87 /* LoginViewControllerTests.swift in Sources */,
 				47CEC37922D8108100DF4A87 /* ValidatorUtils.swift in Sources */,
 				47CEC36322D80E5700DF4A87 /* DesafioSantanderTests.swift in Sources */,
 			);
