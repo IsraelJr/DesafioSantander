@@ -18,8 +18,8 @@ class AccountViewControllerMVC: UIViewController {
     let rateCoercion      = 0.99
     let passwordCoercion  = "1234"
     
-    var statementModel: StatementModel!
-    var statementList: [StatementList] = []
+    var statementModel: StatementModels!
+    var statementList: [StatementModels.StatementList] = []
     var balance: Double = 0.0
     var timer: Timer?
     
@@ -49,17 +49,17 @@ class AccountViewControllerMVC: UIViewController {
     
     func loadStatements() {
 
-        REST.loadStatements(onComplete: { (StatementModelAPI) in
-
-            self.statementList = StatementModelAPI.statementList
-            DispatchQueue.main.async {
-                self.tableviewDetail.reloadData()
-                self.calculateBalance()                
-            }
-            
-        }) { (error) in
-                    print("Deu o erro aqui: \(error)")            
-        }
+//        REST.loadStatements(onComplete: { (StatementModelAPI) in
+//
+//            self.statementList = StatementModelAPI.statementList
+//            DispatchQueue.main.async {
+//                self.tableviewDetail.reloadData()
+//                self.calculateBalance()                
+//            }
+//            
+//        }) { (error) in
+//                    print("Deu o erro aqui: \(error)")            
+//        }
     }
     
 

@@ -24,8 +24,6 @@ enum StatementErrorWorker {
 
 class StatementWorker {
     
-    func doSomeWork() {}
-    
     private static let basePathGet = "https://bank-app-test.herokuapp.com/api/statements/1"
     private static let basePathPost = "https://bank-app-test.herokuapp.com/api/login"
     
@@ -42,48 +40,40 @@ class StatementWorker {
     
     private static let session = URLSession(configuration: configuration)
     
-    class func loadStatements (onComplete: @escaping (StatementModel) -> Void, onError: @escaping (StatementErrorWorker) -> Void) {
+    func loadStatements (onComplete: @escaping (StatementModels) -> Void, onError: @escaping (StatementErrorWorker) -> Void) {
         
-        guard let url = URL(string: basePathGet) else {
+        guard let url = URL(string: StatementWorker.basePathGet) else {
             onError(.url)
-            print("Erro nessa URL!!!")
             return
         }
         
-        let dataTask = session.dataTask(with: url) { (data: Data?, response: URLResponse?, error: Error?) in
+        let dataTask = StatementWorker.session.dataTask(with: url) { (data: Data?, response: URLResponse?, error: Error?) in
             
             if error == nil {
                 guard let resultResponse = response as? HTTPURLResponse else {
                     onError(.noResponse)
-                    print("deu ruim 1")
                     return
                 }
                 
                 if resultResponse.statusCode == 200 {
                     guard let data = data else {
-                        print("deu ruim 2")
                         return
                     }
                     do {
-                        let statementModel = try JSONDecoder().decode(StatementModel.self, from: data)
-                        print("Extrato: \(statementModel.statementList[1].value)")
+                        let statementModel = try JSONDecoder().decode(StatementModels.self, from: data)
                         onComplete(statementModel)
                     } catch {
-                        print("Erro do JSON 2: \(error.localizedDescription)")
                         onError(.invalidJson)
                     }
                     
                 } else {
-                    print("Algum erro do servidor")
                     onError(.responseStatusCode(code: resultResponse.statusCode))
                 }
             } else {
-                print("O erro é esse aqui: \(error!)")
                 onError(.taskError(error: error! as NSError))
             }
             
         }
-        print("deu ruim 3")
         dataTask.resume()
     }
     

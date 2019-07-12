@@ -33,7 +33,7 @@ class DetailTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func prepare(with statement: StatementList){
+    func prepare(with statement: StatementModels.StatementList){
 
         labelTypeLaunch.text  = statement.title
         labelNameAccount.text = statement.desc

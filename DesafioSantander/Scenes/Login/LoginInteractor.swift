@@ -14,32 +14,31 @@ import UIKit
 
 protocol LoginBusinessLogic
 {
-    func doSomething(request: Login.Something.Request)
+    func doSomething(request: Login.UserAccount)
     func validateLogin(user: String, password: String)
     func presentInfo(with: String)
-    func saveData(button: UISwitch, user: UITextField, password: UITextField)
+    func saveData(button: UISwitch, user: UITextField)
     func loadDataUserDefault()
 }
 
 protocol LoginDataStore
 {
-  //var name: String { get set }
+  var userAccount: Login.UserAccount? { get }
 }
 
 class LoginInteractor: LoginBusinessLogic, LoginDataStore
 {
     var presenter: LoginPresentationLogic?
     var worker = LoginWorker()
-    //var name: String = ""
+    var userAccount: Login.UserAccount?
 
     // MARK: Do something
 
-    func doSomething(request: Login.Something.Request)
-    {
-    worker.doSomeWork()
+    func doSomething(request: Login.UserAccount) {
+        worker.doSomeWork()
 
-    let response = Login.Something.Response()
-    presenter?.presentSomething(response: response)
+        let response = Login.UserAccount()
+        presenter?.presentSomething(response: response)
     }
     
     func validateLogin(user: String, password: String) {
@@ -48,7 +47,9 @@ class LoginInteractor: LoginBusinessLogic, LoginDataStore
             &&
             (isValidPassword(passwordUser: password) || password == "1234")
         {
-            presenter?.login(userData: Login.Something.ViewModel(user: user, password: password))
+            getDataUser(user: user, passwrod: password)
+            presenter?.login(userData: userAccount!)
+            
         } else {
             presenter?.showCustomAlert(alertTo: "buttonLogin")
         }
@@ -58,12 +59,22 @@ class LoginInteractor: LoginBusinessLogic, LoginDataStore
         presenter?.showCustomAlert(alertTo: with)
     }
     
-    func saveData(button: UISwitch, user: UITextField, password: UITextField) {
+    func saveData(button: UISwitch, user: UITextField) {
         worker.saveUserDefault(button: button, user: user)
     }
     
     func loadDataUserDefault() {
          presenter?.dataInitial(dataSwitch: worker.loadUserDefaultBool(), dataUser: worker.loadUserDefault())
+    }
+    
+    private func getDataUser(user: String, passwrod: String) {
+//        worker.validateLogin(userModel: dataLogin, onComplete: { rc in
+//            DispatchQueue.main.async {
+//                print("POST Login validaton return: \(rc)")
+//            }
+//        }
+//    )
+        self.userAccount = Login.UserAccount(userId: 1, name: user, agency: "0642", bankAccount: "01.035063-2", balance: 0.0)
     }
     
 }

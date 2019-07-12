@@ -14,16 +14,13 @@ import UIKit
 
 protocol StatementDisplayLogic: class
 {
-    func displaySomething(viewModel: Statement.Something.ViewModel)
-    func displayTeste(value: [StatementList])
-    func dataAccount(valueBalance: Double)
+    func displayExtract(value: [StatementModels.StatementList])
+    func displayDataAccount(accountUser: Login.UserAccount)
+    func failure(alertController: UIAlertController)    
 }
 
-//protocol ExtractDataStore {
-//    var userAccount: Login.Something.ViewModel? { get set }
-//}
 
-class StatementViewController: UIViewController, StatementDisplayLogic//, ExtractDataStore
+class StatementViewController: UIViewController, StatementDisplayLogic
 {
     var interactor: StatementBusinessLogic?
     var router: (NSObjectProtocol & StatementRoutingLogic & StatementDataPassing)?
@@ -33,10 +30,12 @@ class StatementViewController: UIViewController, StatementDisplayLogic//, Extrac
     @IBOutlet weak var labelBalance:     UILabel!
     @IBOutlet weak var tableviewDetail:  UITableView!
     
-    var statementList: [StatementList] = []
+    var passwordUser = ""
+    var statementList: [StatementModels.StatementList]  = []
     var timer: Timer?
-    var userAccount: Login.Something.ViewModel?
-
+    
+    var dataLogin = Login.UserAccount()
+    
   // MARK: Object lifecycle
   
   override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?)
@@ -59,6 +58,7 @@ class StatementViewController: UIViewController, StatementDisplayLogic//, Extrac
     let interactor = StatementInteractor()
     let presenter = StatementPresenter()
     let router = StatementRouter()
+    
     viewController.interactor = interactor
     viewController.router = router
     interactor.presenter = presenter
@@ -85,7 +85,7 @@ class StatementViewController: UIViewController, StatementDisplayLogic//, Extrac
   {
     super.viewDidLoad()
     doSomething()
-    print("A senha é: \(userAccount?.password)")
+    interactor?.validateCoercion(password: passwordUser)
   }
   
   // MARK: Do something
@@ -94,29 +94,25 @@ class StatementViewController: UIViewController, StatementDisplayLogic//, Extrac
   
       func doSomething()
       {
-        let request = Statement.Something.Request()
-        interactor?.doSomething(request: request)
+        interactor?.doSomething()        
       }
   
-      func displaySomething(viewModel: Statement.Something.ViewModel)
-      {
-        //nameTextField.text = viewModel.name
-      }
-    
-    func displayTeste(value: [StatementList])
+
+    func displayExtract(value: [StatementModels.StatementList])
     {
-        labelNamePerson.text = "teste meu"
         statementList = value
-        print("display teste: \(statementList.count)")
         self.tableviewDetail.reloadData()
     }
     
-    func dataAccount(valueBalance: Double) {
-        
-        labelBalance.text = String(format: "R$ %.2f", valueBalance)
-//                if passwordUser == passwordCoercion {
-//                    labelBalance.text = String(format: "R$ %.2f", (valueBalance - (valueBalance * rateCoercion)))
-//                }
+    
+    func displayDataAccount(accountUser: Login.UserAccount) {
+        var name = accountUser.name
+        if accountUser.name == "israel.junior2111@gmail.com" {
+            name = "Israel Alves Dos Santos Junior"
+        }
+        labelNamePerson.text = name
+        labelDataAccount.text = "\(accountUser.agency!) / \(accountUser.bankAccount!)"
+        labelBalance.text = String(format: "R$ %.2f", accountUser.balance!)
     }
     
     @IBAction func buttonLogout(_ sender: UIButton) {
@@ -125,6 +121,10 @@ class StatementViewController: UIViewController, StatementDisplayLogic//, Extrac
         timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { (timer) in
             self.dismiss(animated: true, completion: nil)
         }
+    }
+    
+    func failure(alertController: UIAlertController) {
+        self.present(alertController, animated: true, completion: nil)
     }
 }
 

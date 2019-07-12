@@ -15,11 +15,25 @@ import UIKit
 
 class LoginWorker {
     
-    let ud = UserDefaults.standard
+    let url = "https://bank-app-test.herokuapp.com/api/login"
+    let ud  = UserDefaults.standard
     
-    func doSomeWork() {
-      
-    }
+    private static let basePathPost = "https://bank-app-test.herokuapp.com/api/login"
+    private static let configuration: URLSessionConfiguration = {
+
+        let config = URLSessionConfiguration.default
+        config.httpAdditionalHeaders = ["Content-Type": "application/json"]
+        config.timeoutIntervalForRequest = 5.0
+        config.httpMaximumConnectionsPerHost = 2
+
+        return config
+
+    }()
+
+private static let session = URLSession(configuration: configuration)
+
+    
+    func doSomeWork() { }
     
     func saveUserDefault(button: UISwitch, user: UITextField) {
 
@@ -37,9 +51,42 @@ class LoginWorker {
     }
     
     func loadUserDefaultBool() -> Bool {
-        print("Carregamento do switch é: \(self.ud.bool(forKey: "saveUser"))")
         return self.ud.bool(forKey: "saveUser")
     }
+
     
+    func validateLogin(userModel: Login.UserAccount, onComplete: @escaping (Bool) -> Void){
+        guard let url = URL(string: LoginWorker.basePathPost) else {
+                 onComplete(false)
+                    return
+                }
+        
+                var request = URLRequest(url: url)
+                request.httpMethod = "POST"
+                guard let json = try? JSONEncoder().encode(userModel) else {
+                    onComplete(false)
+                    return
+                }
+        
+                request.httpBody = json
+        
+        let dataTask = LoginWorker.session.dataTask(with: url) { (dataJson, responseJson, error) in
+                    if error == nil {
+                        let response = responseJson as? HTTPURLResponse
+                        if response!.statusCode == 200 {
+                            let data = dataJson
+                            print("Login Worker Resultado: \(String(describing: data))")
+                            onComplete(true)
+                        } else {
+                            onComplete(false)
+                            print("Login Worker Código de retorno da requisição: \(String(describing: response?.statusCode))")
+                            return
+                        }
+                    } else {
+                        onComplete(false)
+                    }
+                }
+                dataTask.resume()
+            }
     
 }

@@ -14,9 +14,9 @@ import UIKit
 
 protocol StatementPresentationLogic
 {
-    func presentSomething(response: Statement.Something.Response)
-    func presentTeste(extract: [StatementList])
-    func presentDataAccount(value: Double)
+    func presentExtract(extract: [StatementModels.StatementList])
+    func presenterDataAccountUser(accountUser: Login.UserAccount)
+    func customAlertAPI()
 }
 
 class StatementPresenter: StatementPresentationLogic
@@ -25,17 +25,22 @@ class StatementPresenter: StatementPresentationLogic
   
   // MARK: Do something
   
-  func presentSomething(response: Statement.Something.Response)
-  {
-    let viewModel = Statement.Something.ViewModel()
-    viewController?.displaySomething(viewModel: viewModel)
-  }
-    
-    func presentTeste(extract: [StatementList]) {
-        viewController?.displayTeste(value: extract)
+    func presentExtract(extract: [StatementModels.StatementList]) {
+        viewController?.displayExtract(value: extract)
     }
     
-    func presentDataAccount(value: Double) {
-        viewController?.dataAccount(valueBalance: value)
+    
+    func presenterDataAccountUser(accountUser: Login.UserAccount){
+        viewController?.displayDataAccount(accountUser: accountUser)
     }
+    
+    func customAlertAPI() {
+        let message = UIAlertController(title: "Falha Conexão", message: "Não foi possível conectar ao servidor! Feche o aplicativo e tente novamente.", preferredStyle: .alert)
+        
+        message.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
+            NSLog("The \"OK\" alert occured.")}))
+        
+        viewController?.failure(alertController: message)
+    }
+    
 }

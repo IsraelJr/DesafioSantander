@@ -10,50 +10,32 @@
 //  see http://clean-swift.com
 //
 
-import UIKit
+import Foundation
 
-enum Statement
-{
-  // MARK: Use cases
-  
-  enum Something
-  {
-    struct Request
-    {
+struct StatementModels: Codable {
+    let statementList: [StatementList]
+    let error: Error?
+    
+    struct StatementList: Codable {
+        let title: String
+        let desc: String
+        let date: String
+        var value: Double
+        
+        var valueFormatted: String {
+            return "R$ \(value)"
+        }
+        
+        var dateFormatted: String {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd"
+            let date = dateFormatter.date(from: self.date) // replace Date String
+            dateFormatter.dateFormat = "dd/MM/yyyy"
+            return dateFormatter.string(from: date!)
+        }
     }
-    struct Response
-    {
+    struct Error: Codable {
+        var message: String?
     }
-    struct ViewModel
-    {
-    }
-  }
+    
 }
-
-//struct StatementModels: Codable {
-//    let statementList: [StatementList]
-//    let error: Error?
-//    
-//    struct StatementList: Codable {
-//        let title: String
-//        let desc: String
-//        let date: String
-//        let value: Double
-//        
-//        var valueFormatted: String {
-//            return "R$ \(value)"
-//        }
-//        
-//        var dateFormatted: String {
-//            let dateFormatter = DateFormatter()
-//            dateFormatter.dateFormat = "yyyy-MM-dd"
-//            let date = dateFormatter.date(from: self.date) // replace Date String
-//            dateFormatter.dateFormat = "dd/MM/yyyy"
-//            return dateFormatter.string(from: date!)
-//        }
-//    }
-//    struct Error: Codable {
-//        var message: String?
-//    }
-//    
-//}

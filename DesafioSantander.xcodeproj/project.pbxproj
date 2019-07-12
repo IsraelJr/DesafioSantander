@@ -32,7 +32,27 @@
 		47CEC35722CFF32A00DF4A87 /* LoginModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47CEC35122CFF32A00DF4A87 /* LoginModels.swift */; };
 		47CEC35822CFF32A00DF4A87 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47CEC35222CFF32A00DF4A87 /* LoginViewController.swift */; };
 		47CEC35922CFF32A00DF4A87 /* LoginInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47CEC35322CFF32A00DF4A87 /* LoginInteractor.swift */; };
+		47CEC36322D80E5700DF4A87 /* DesafioSantanderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47CEC36222D80E5700DF4A87 /* DesafioSantanderTests.swift */; };
+		47CEC37122D80FB900DF4A87 /* TestsValidationUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47CEC37022D80FB900DF4A87 /* TestsValidationUtil.swift */; };
+		47CEC37922D8108100DF4A87 /* ValidatorUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47CEC37822D8108100DF4A87 /* ValidatorUtils.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		47CEC36522D80E5700DF4A87 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 47CEC2ED22C2931600DF4A87 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 47CEC2F422C2931600DF4A87;
+			remoteInfo = DesafioSantander;
+		};
+		47CEC37322D80FB900DF4A87 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 47CEC2ED22C2931600DF4A87 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 47CEC2F422C2931600DF4A87;
+			remoteInfo = DesafioSantander;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		47CEC2F522C2931600DF4A87 /* DesafioSantander.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DesafioSantander.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -62,10 +82,31 @@
 		47CEC35122CFF32A00DF4A87 /* LoginModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModels.swift; sourceTree = "<group>"; };
 		47CEC35222CFF32A00DF4A87 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		47CEC35322CFF32A00DF4A87 /* LoginInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginInteractor.swift; sourceTree = "<group>"; };
+		47CEC36022D80E5700DF4A87 /* DesafioSantanderTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DesafioSantanderTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		47CEC36222D80E5700DF4A87 /* DesafioSantanderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesafioSantanderTests.swift; sourceTree = "<group>"; };
+		47CEC36422D80E5700DF4A87 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		47CEC36E22D80FB900DF4A87 /* TestsValidationUtil.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TestsValidationUtil.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		47CEC37022D80FB900DF4A87 /* TestsValidationUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestsValidationUtil.swift; sourceTree = "<group>"; };
+		47CEC37222D80FB900DF4A87 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		47CEC37822D8108100DF4A87 /* ValidatorUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidatorUtils.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		47CEC2F222C2931600DF4A87 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		47CEC35D22D80E5700DF4A87 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		47CEC36B22D80FB900DF4A87 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -79,6 +120,8 @@
 			isa = PBXGroup;
 			children = (
 				47CEC2F722C2931600DF4A87 /* DesafioSantander */,
+				47CEC36122D80E5700DF4A87 /* DesafioSantanderTests */,
+				47CEC36F22D80FB900DF4A87 /* TestsValidationUtil */,
 				47CEC2F622C2931600DF4A87 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -87,6 +130,8 @@
 			isa = PBXGroup;
 			children = (
 				47CEC2F522C2931600DF4A87 /* DesafioSantander.app */,
+				47CEC36022D80E5700DF4A87 /* DesafioSantanderTests.xctest */,
+				47CEC36E22D80FB900DF4A87 /* TestsValidationUtil.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -94,12 +139,10 @@
 		47CEC2F722C2931600DF4A87 /* DesafioSantander */ = {
 			isa = PBXGroup;
 			children = (
+				47CEC2FF22C2931700DF4A87 /* Assets.xcassets */,
 				47CEC33D22CFEFBE00DF4A87 /* Scenes */,
 				47CEC31522C2CD4A00DF4A87 /* Files */,
-				47CEC2F822C2931600DF4A87 /* AppDelegate.swift */,
 				47CEC30C22C2973200DF4A87 /* Controller */,
-				47CEC30D22C2974400DF4A87 /* View */,
-				47CEC2FF22C2931700DF4A87 /* Assets.xcassets */,
 				47CEC30422C2931700DF4A87 /* Info.plist */,
 			);
 			path = DesafioSantander;
@@ -110,19 +153,9 @@
 			children = (
 				47CEC2FA22C2931600DF4A87 /* LoginViewControllerMVC.swift */,
 				47CEC30A22C2964800DF4A87 /* AccountViewControllerMVC.swift */,
-				47CEC31022C2C06900DF4A87 /* DetailTableViewCell.swift */,
 				47CEC31422C2C98700DF4A87 /* Model */,
 			);
 			path = Controller;
-			sourceTree = "<group>";
-		};
-		47CEC30D22C2974400DF4A87 /* View */ = {
-			isa = PBXGroup;
-			children = (
-				47CEC30122C2931700DF4A87 /* LaunchScreen.storyboard */,
-				47CEC2FC22C2931600DF4A87 /* Main.storyboard */,
-			);
-			path = View;
 			sourceTree = "<group>";
 		};
 		47CEC31422C2C98700DF4A87 /* Model */ = {
@@ -131,7 +164,6 @@
 				47CEC31222C2C98000DF4A87 /* StatementModel.swift */,
 				47CEC32022C8540D00DF4A87 /* UserModel.swift */,
 				47CEC31A22C694C900DF4A87 /* REST.swift */,
-				47CEC31822C41ABD00DF4A87 /* ValidatorUtils.swift */,
 				47CEC32422CFA99700DF4A87 /* UserModels.swift */,
 			);
 			path = Model;
@@ -148,6 +180,8 @@
 		47CEC33D22CFEFBE00DF4A87 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				47CEC31822C41ABD00DF4A87 /* ValidatorUtils.swift */,
+				47CEC35B22D80CB100DF4A87 /* View */,
 				47CEC33F22CFEFD500DF4A87 /* Statement */,
 				47CEC33E22CFEFCB00DF4A87 /* Login */,
 			);
@@ -176,8 +210,38 @@
 				47CEC34522CFF05300DF4A87 /* StatementModels.swift */,
 				47CEC34622CFF05300DF4A87 /* StatementViewController.swift */,
 				47CEC34722CFF05300DF4A87 /* StatementInteractor.swift */,
+				47CEC31022C2C06900DF4A87 /* DetailTableViewCell.swift */,
 			);
 			path = Statement;
+			sourceTree = "<group>";
+		};
+		47CEC35B22D80CB100DF4A87 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				47CEC2F822C2931600DF4A87 /* AppDelegate.swift */,
+				47CEC30122C2931700DF4A87 /* LaunchScreen.storyboard */,
+				47CEC2FC22C2931600DF4A87 /* Main.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		47CEC36122D80E5700DF4A87 /* DesafioSantanderTests */ = {
+			isa = PBXGroup;
+			children = (
+				47CEC37822D8108100DF4A87 /* ValidatorUtils.swift */,
+				47CEC36222D80E5700DF4A87 /* DesafioSantanderTests.swift */,
+				47CEC36422D80E5700DF4A87 /* Info.plist */,
+			);
+			path = DesafioSantanderTests;
+			sourceTree = "<group>";
+		};
+		47CEC36F22D80FB900DF4A87 /* TestsValidationUtil */ = {
+			isa = PBXGroup;
+			children = (
+				47CEC37022D80FB900DF4A87 /* TestsValidationUtil.swift */,
+				47CEC37222D80FB900DF4A87 /* Info.plist */,
+			);
+			path = TestsValidationUtil;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -200,6 +264,42 @@
 			productReference = 47CEC2F522C2931600DF4A87 /* DesafioSantander.app */;
 			productType = "com.apple.product-type.application";
 		};
+		47CEC35F22D80E5700DF4A87 /* DesafioSantanderTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 47CEC36722D80E5700DF4A87 /* Build configuration list for PBXNativeTarget "DesafioSantanderTests" */;
+			buildPhases = (
+				47CEC35C22D80E5700DF4A87 /* Sources */,
+				47CEC35D22D80E5700DF4A87 /* Frameworks */,
+				47CEC35E22D80E5700DF4A87 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				47CEC36622D80E5700DF4A87 /* PBXTargetDependency */,
+			);
+			name = DesafioSantanderTests;
+			productName = DesafioSantanderTests;
+			productReference = 47CEC36022D80E5700DF4A87 /* DesafioSantanderTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		47CEC36D22D80FB900DF4A87 /* TestsValidationUtil */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 47CEC37522D80FB900DF4A87 /* Build configuration list for PBXNativeTarget "TestsValidationUtil" */;
+			buildPhases = (
+				47CEC36A22D80FB900DF4A87 /* Sources */,
+				47CEC36B22D80FB900DF4A87 /* Frameworks */,
+				47CEC36C22D80FB900DF4A87 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				47CEC37422D80FB900DF4A87 /* PBXTargetDependency */,
+			);
+			name = TestsValidationUtil;
+			productName = TestsValidationUtil;
+			productReference = 47CEC36E22D80FB900DF4A87 /* TestsValidationUtil.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -212,6 +312,14 @@
 				TargetAttributes = {
 					47CEC2F422C2931600DF4A87 = {
 						CreatedOnToolsVersion = 10.2.1;
+					};
+					47CEC35F22D80E5700DF4A87 = {
+						CreatedOnToolsVersion = 10.2.1;
+						TestTargetID = 47CEC2F422C2931600DF4A87;
+					};
+					47CEC36D22D80FB900DF4A87 = {
+						CreatedOnToolsVersion = 10.2.1;
+						TestTargetID = 47CEC2F422C2931600DF4A87;
 					};
 				};
 			};
@@ -229,6 +337,8 @@
 			projectRoot = "";
 			targets = (
 				47CEC2F422C2931600DF4A87 /* DesafioSantander */,
+				47CEC35F22D80E5700DF4A87 /* DesafioSantanderTests */,
+				47CEC36D22D80FB900DF4A87 /* TestsValidationUtil */,
 			);
 		};
 /* End PBXProject section */
@@ -242,6 +352,20 @@
 				47CEC30322C2931700DF4A87 /* LaunchScreen.storyboard in Resources */,
 				47CEC30022C2931700DF4A87 /* Assets.xcassets in Resources */,
 				47CEC2FE22C2931600DF4A87 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		47CEC35E22D80E5700DF4A87 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		47CEC36C22D80FB900DF4A87 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -276,7 +400,37 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		47CEC35C22D80E5700DF4A87 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				47CEC37922D8108100DF4A87 /* ValidatorUtils.swift in Sources */,
+				47CEC36322D80E5700DF4A87 /* DesafioSantanderTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		47CEC36A22D80FB900DF4A87 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				47CEC37122D80FB900DF4A87 /* TestsValidationUtil.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		47CEC36622D80E5700DF4A87 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 47CEC2F422C2931600DF4A87 /* DesafioSantander */;
+			targetProxy = 47CEC36522D80E5700DF4A87 /* PBXContainerItemProxy */;
+		};
+		47CEC37422D80FB900DF4A87 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 47CEC2F422C2931600DF4A87 /* DesafioSantander */;
+			targetProxy = 47CEC37322D80FB900DF4A87 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		47CEC2FC22C2931600DF4A87 /* Main.storyboard */ = {
@@ -448,6 +602,82 @@
 			};
 			name = Release;
 		};
+		47CEC36822D80E5700DF4A87 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = DesafioSantanderTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.iasj.DesafioSantanderTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DesafioSantander.app/DesafioSantander";
+			};
+			name = Debug;
+		};
+		47CEC36922D80E5700DF4A87 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = DesafioSantanderTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.iasj.DesafioSantanderTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DesafioSantander.app/DesafioSantander";
+			};
+			name = Release;
+		};
+		47CEC37622D80FB900DF4A87 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = TestsValidationUtil/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.iasj.TestsValidationUtil;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DesafioSantander.app/DesafioSantander";
+			};
+			name = Debug;
+		};
+		47CEC37722D80FB900DF4A87 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = TestsValidationUtil/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.iasj.TestsValidationUtil;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DesafioSantander.app/DesafioSantander";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -465,6 +695,24 @@
 			buildConfigurations = (
 				47CEC30822C2931700DF4A87 /* Debug */,
 				47CEC30922C2931700DF4A87 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		47CEC36722D80E5700DF4A87 /* Build configuration list for PBXNativeTarget "DesafioSantanderTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				47CEC36822D80E5700DF4A87 /* Debug */,
+				47CEC36922D80E5700DF4A87 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		47CEC37522D80FB900DF4A87 /* Build configuration list for PBXNativeTarget "TestsValidationUtil" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				47CEC37622D80FB900DF4A87 /* Debug */,
+				47CEC37722D80FB900DF4A87 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

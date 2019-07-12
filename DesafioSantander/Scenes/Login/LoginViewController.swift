@@ -14,8 +14,7 @@ import UIKit
 
 protocol LoginDisplayLogic: class
 {
-    func displaySomething(viewModel: Login.Something.ViewModel)
-    func success(userData: Login.Something.ViewModel) -> Void
+    func success(userData: Login.UserAccount) -> Void
     func failure(alertController: UIAlertController) -> Void
     func initializeDataLogin(switchLogin: Bool, user: String)
 }
@@ -45,8 +44,9 @@ class LoginViewController: UIViewController, LoginDisplayLogic, UITextFieldDeleg
     var interactor: LoginBusinessLogic?
     var router: (NSObjectProtocol & LoginRoutingLogic & LoginDataPassing)?
     
-    let ud = UserDefaults.standard
-  // MARK: Object lifecycle
+    var userLogin = ""
+  
+    // MARK: Object lifecycle
   
   override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?)
   {
@@ -89,16 +89,11 @@ class LoginViewController: UIViewController, LoginDisplayLogic, UITextFieldDeleg
           }
         }
         
-        if segue.destination is AccountViewControllerMVC {
-            let vc = segue.destination as? AccountViewControllerMVC
-            if textFieldUser.text == "israel.junior2111@gmail.com" {
-                vc?.nameUser        = "Israel Alves Dos Santos Junior"
-                vc?.dataAccount     = "0642 / 01.035063-2"
-            }
-            vc?.passwordUser    = textFieldPassword.text!
-            
-        }
         
+        if segue.destination is StatementViewController {
+            let vc = segue.destination as? StatementViewController
+            vc?.passwordUser    = textFieldPassword.text!
+        }        
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -110,35 +105,21 @@ class LoginViewController: UIViewController, LoginDisplayLogic, UITextFieldDeleg
   
   override func viewDidLoad() {
     super.viewDidLoad()
-//    doSomething()
     initializeLayout()
     interactor?.loadDataUserDefault()    
   }
   
   // MARK: Do something
-  
-  //@IBOutlet weak var nameTextField: UITextField!
-  
-  func doSomething()
-  {
-//    let request = Login.Something.Request()
-//    interactor?.doSomething(request: request)
-  }
-  
-  func displaySomething(viewModel: Login.Something.ViewModel)
-  {
-    //nameTextField.text = viewModel.name
-  }
     
- func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-    if textField == textFieldUser {
-        textFieldPassword.becomeFirstResponder()
-    } else {
-        view.endEditing(true)
-        actionButtons(buttonLogin)
-    }
-    return true
- }
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField == textFieldUser {
+            textFieldPassword.becomeFirstResponder()
+        } else {
+            view.endEditing(true)
+            actionButtons(buttonLogin)
+        }
+        return true
+     }
     
  func initializeLayout() {
         
@@ -194,6 +175,7 @@ class LoginViewController: UIViewController, LoginDisplayLogic, UITextFieldDeleg
     switch String(sender.restorationIdentifier!) {
     case "buttonLogin":
         if let userValue = self.textFieldUser.text, let passwordValue = self.textFieldPassword.text {
+            userLogin = textFieldUser.text!
             interactor?.validateLogin(user: userValue, password: passwordValue)
         }
     case "buttonInfo":
@@ -208,11 +190,10 @@ class LoginViewController: UIViewController, LoginDisplayLogic, UITextFieldDeleg
         self.present(alertController, animated: true, completion: nil)
     }
 
-    func success(userData: Login.Something.ViewModel) {
+    func success(userData: Login.UserAccount) {
         dismiss(animated: true, completion: nil)
-        self.interactor?.saveData(button: switchSaveUser, user: textFieldUser, password: textFieldPassword)
+        self.interactor?.saveData(button: switchSaveUser, user: textFieldUser)
         self.performSegue(withIdentifier: "segueSceneAccount", sender: userData)
-        print("viewcontroller login é: \(userData.password)")
         textFieldPassword.text = nil
     }
   

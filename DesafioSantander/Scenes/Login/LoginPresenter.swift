@@ -20,10 +20,10 @@ enum InfoAlert: String {
 
 protocol LoginPresentationLogic
 {
-    func presentSomething(response: Login.Something.Response)
+    func presentSomething(response: Login.UserAccount)
     func dataInitial(dataSwitch: Bool, dataUser: String)
     func showCustomAlert(alertTo: String)
-    func login(userData: Login.Something.ViewModel)
+    func login(userData: Login.UserAccount)
 }
 
 class LoginPresenter: LoginPresentationLogic
@@ -32,11 +32,7 @@ class LoginPresenter: LoginPresentationLogic
   
   // MARK: Do something
   
-    func presentSomething(response: Login.Something.Response)
-    {
-//        let viewModel = Login.Something.ViewModel()
-//        viewController?.displaySomething(viewModel: viewModel)
-    }
+    func presentSomething(response: Login.UserAccount) {}
     
     func dataInitial(dataSwitch: Bool, dataUser: String) {
         viewController?.initializeDataLogin(switchLogin: dataSwitch, user: dataUser)
@@ -70,8 +66,7 @@ class LoginPresenter: LoginPresentationLogic
         viewController?.failure(alertController: message)
     }
 
-    func login(userData: Login.Something.ViewModel){
-        print("presenter login é: \(userData.password)")
+    func login(userData: Login.UserAccount){
         viewController?.success(userData: userData)
     }
 }
