@@ -47,8 +47,7 @@ class LoginInteractor: LoginBusinessLogic, LoginDataStore
             &&
             (isValidPassword(passwordUser: password) || password == "1234")
         {
-            getDataUser(user: user, passwrod: password)
-            presenter?.login(userData: userAccount!)
+            getDataUser(user: user, password: password)
             
         } else {
             presenter?.showCustomAlert(alertTo: "buttonLogin")
@@ -67,14 +66,13 @@ class LoginInteractor: LoginBusinessLogic, LoginDataStore
          presenter?.dataInitial(dataSwitch: worker.loadUserDefaultBool(), dataUser: worker.loadUserDefault())
     }
     
-    private func getDataUser(user: String, passwrod: String) {
-//        worker.validateLogin(userModel: dataLogin, onComplete: { rc in
-//            DispatchQueue.main.async {
-//                print("POST Login validaton return: \(rc)")
-//            }
-//        }
-//    )
-        self.userAccount = Login.UserAccount(userId: 1, name: user, agency: "0642", bankAccount: "01.035063-2", balance: 0.0)
+    private func getDataUser(user: String, password: String) {
+        let parm = ["user": user, "password": password]
+        worker.validateLogin(parameters: parm, onComplete: { rc in
+            self.userAccount = rc.userAccount
+            self.presenter?.login(userData: self.userAccount!)
+        })
     }
+    
     
 }

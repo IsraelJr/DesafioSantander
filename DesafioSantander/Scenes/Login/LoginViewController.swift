@@ -87,8 +87,7 @@ class LoginViewController: UIViewController, LoginDisplayLogic, UITextFieldDeleg
           if let router = router, router.responds(to: selector) {
             router.perform(selector, with: segue)
           }
-        }
-        
+        }        
         
         if segue.destination is StatementViewController {
             let vc = segue.destination as? StatementViewController

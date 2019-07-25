@@ -30,7 +30,7 @@ class StatementInteractor: StatementBusinessLogic, StatementDataStore
     
     var userAccount: Login.UserAccount?
     var statementList: [StatementModels.StatementList] = []
-    var balance: Double     = 0.0
+    var balance             = 0.0
     var rateCoercion        = 0.0
     let passwordCoercion    = "1234"
     
@@ -38,22 +38,22 @@ class StatementInteractor: StatementBusinessLogic, StatementDataStore
   
     func doSomething()
     {
+        balance = (userAccount?.balance!)!
         loadStatements()
       }
     
-    private func loadStatements() {
-        
-        worker.loadStatements(onComplete: { (StatementModelAPI) in
+    private func loadStatements() {        
+      
+        worker.loadStatements(onComplete: { (StatementModels) in
             
-            self.statementList = StatementModelAPI.statementList
-            DispatchQueue.main.async {
-                self.presenter?.presentExtract(extract: self.statementList)
-                self.userAccount?.balance = self.calculateBalance()
-                self.getDataAccountUser()
-            }
-        }) { (error) in
+            self.statementList = StatementModels.statementList
+            self.presenter?.presentExtract(extract: self.statementList)
+            self.userAccount?.balance = self.calculateBalance()
+            self.getDataAccountUser()
+            
+        },onError: { (error) in
             self.presenter?.customAlertAPI()
-        }
+        })
     }
     
     private func calculateBalance() -> Double {

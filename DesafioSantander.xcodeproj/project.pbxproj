@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -30,6 +30,8 @@
 		47CEC37922D8108100DF4A87 /* ValidatorUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47CEC37822D8108100DF4A87 /* ValidatorUtils.swift */; };
 		47CEC37B22D8D76600DF4A87 /* LoginViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47CEC37A22D8D76600DF4A87 /* LoginViewControllerTests.swift */; };
 		47CEC37D22D8DD7B00DF4A87 /* LoginInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47CEC37C22D8DD7B00DF4A87 /* LoginInteractorTests.swift */; };
+		C6DB5CAA4868C8540B75CF8D /* Pods_DesafioSantanderTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B8CBCB7E3DFD26EDE994FD6 /* Pods_DesafioSantanderTests.framework */; };
+		D0961B5F5969312474950F3E /* Pods_DesafioSantander.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0675B48E7B956AEDA0B51754 /* Pods_DesafioSantander.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,6 +52,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0675B48E7B956AEDA0B51754 /* Pods_DesafioSantander.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DesafioSantander.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		07B31955CED2634D87DBAF24 /* Pods-DesafioSantanderTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DesafioSantanderTests.debug.xcconfig"; path = "Target Support Files/Pods-DesafioSantanderTests/Pods-DesafioSantanderTests.debug.xcconfig"; sourceTree = "<group>"; };
+		0B8CBCB7E3DFD26EDE994FD6 /* Pods_DesafioSantanderTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DesafioSantanderTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		0EFCB331418F4E9A07711A6B /* Pods-DesafioSantander.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DesafioSantander.release.xcconfig"; path = "Target Support Files/Pods-DesafioSantander/Pods-DesafioSantander.release.xcconfig"; sourceTree = "<group>"; };
+		24DF3DDBE4B27572233998CF /* Pods-DesafioSantander.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DesafioSantander.debug.xcconfig"; path = "Target Support Files/Pods-DesafioSantander/Pods-DesafioSantander.debug.xcconfig"; sourceTree = "<group>"; };
+		4761E17722EA1FB500E46450 /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		47CEC2F522C2931600DF4A87 /* DesafioSantander.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DesafioSantander.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		47CEC2F822C2931600DF4A87 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		47CEC2FD22C2931600DF4A87 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -79,6 +87,7 @@
 		47CEC37822D8108100DF4A87 /* ValidatorUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidatorUtils.swift; sourceTree = "<group>"; };
 		47CEC37A22D8D76600DF4A87 /* LoginViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewControllerTests.swift; sourceTree = "<group>"; };
 		47CEC37C22D8DD7B00DF4A87 /* LoginInteractorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginInteractorTests.swift; sourceTree = "<group>"; };
+		7C56DD6D0D8A6A5BD923CF71 /* Pods-DesafioSantanderTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DesafioSantanderTests.release.xcconfig"; path = "Target Support Files/Pods-DesafioSantanderTests/Pods-DesafioSantanderTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +95,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D0961B5F5969312474950F3E /* Pods_DesafioSantander.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -93,6 +103,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C6DB5CAA4868C8540B75CF8D /* Pods_DesafioSantanderTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -113,6 +124,8 @@
 				47CEC36122D80E5700DF4A87 /* DesafioSantanderTests */,
 				47CEC36F22D80FB900DF4A87 /* TestsValidationUtil */,
 				47CEC2F622C2931600DF4A87 /* Products */,
+				94FE48CC00795F6BC6B1909C /* Pods */,
+				89F6090604D77D3EA16EF9E6 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -205,6 +218,27 @@
 			path = TestsValidationUtil;
 			sourceTree = "<group>";
 		};
+		89F6090604D77D3EA16EF9E6 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				4761E17722EA1FB500E46450 /* Alamofire.framework */,
+				0675B48E7B956AEDA0B51754 /* Pods_DesafioSantander.framework */,
+				0B8CBCB7E3DFD26EDE994FD6 /* Pods_DesafioSantanderTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		94FE48CC00795F6BC6B1909C /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				24DF3DDBE4B27572233998CF /* Pods-DesafioSantander.debug.xcconfig */,
+				0EFCB331418F4E9A07711A6B /* Pods-DesafioSantander.release.xcconfig */,
+				07B31955CED2634D87DBAF24 /* Pods-DesafioSantanderTests.debug.xcconfig */,
+				7C56DD6D0D8A6A5BD923CF71 /* Pods-DesafioSantanderTests.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -212,9 +246,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 47CEC30722C2931700DF4A87 /* Build configuration list for PBXNativeTarget "DesafioSantander" */;
 			buildPhases = (
+				F75168AE1E8E1447F66CEE6F /* [CP] Check Pods Manifest.lock */,
 				47CEC2F122C2931600DF4A87 /* Sources */,
 				47CEC2F222C2931600DF4A87 /* Frameworks */,
 				47CEC2F322C2931600DF4A87 /* Resources */,
+				B93C9E232A60B2492D884ACE /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -229,9 +265,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 47CEC36722D80E5700DF4A87 /* Build configuration list for PBXNativeTarget "DesafioSantanderTests" */;
 			buildPhases = (
+				D9844F7950ADCE94A57640FD /* [CP] Check Pods Manifest.lock */,
 				47CEC35C22D80E5700DF4A87 /* Sources */,
 				47CEC35D22D80E5700DF4A87 /* Frameworks */,
 				47CEC35E22D80E5700DF4A87 /* Resources */,
+				51D9AB94E308480D7ED3F652 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -330,6 +368,87 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		51D9AB94E308480D7ED3F652 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-DesafioSantanderTests/Pods-DesafioSantanderTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-DesafioSantanderTests/Pods-DesafioSantanderTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-DesafioSantanderTests/Pods-DesafioSantanderTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B93C9E232A60B2492D884ACE /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-DesafioSantander/Pods-DesafioSantander-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-DesafioSantander/Pods-DesafioSantander-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-DesafioSantander/Pods-DesafioSantander-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D9844F7950ADCE94A57640FD /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-DesafioSantanderTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F75168AE1E8E1447F66CEE6F /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-DesafioSantander-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		47CEC2F122C2931600DF4A87 /* Sources */ = {
@@ -526,10 +645,12 @@
 		};
 		47CEC30822C2931700DF4A87 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 24DF3DDBE4B27572233998CF /* Pods-DesafioSantander.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = DesafioSantander/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -543,10 +664,12 @@
 		};
 		47CEC30922C2931700DF4A87 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0EFCB331418F4E9A07711A6B /* Pods-DesafioSantander.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = DesafioSantander/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -560,6 +683,7 @@
 		};
 		47CEC36822D80E5700DF4A87 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 07B31955CED2634D87DBAF24 /* Pods-DesafioSantanderTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
@@ -579,6 +703,7 @@
 		};
 		47CEC36922D80E5700DF4A87 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7C56DD6D0D8A6A5BD923CF71 /* Pods-DesafioSantanderTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;

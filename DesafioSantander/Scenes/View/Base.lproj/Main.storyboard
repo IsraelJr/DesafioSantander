@@ -273,7 +273,7 @@
                                                 <constraint firstAttribute="bottom" secondItem="9YH-oA-ubY" secondAttribute="bottom" constant="16" id="ooh-6G-8Q1"/>
                                             </constraints>
                                         </tableViewCellContentView>
-                                        <color key="backgroundColor" red="0.99597054719924927" green="0.99614065885543823" blue="0.9959598183631897" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" red="0.99607843137254903" green="0.99607843137254903" blue="0.99607843137254903" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <edgeInsets key="layoutMargins" top="10" left="10" bottom="10" right="10"/>
                                         <connections>
                                             <outlet property="labelDateLaunch" destination="37O-vN-myR" id="O09-zi-wOf"/>

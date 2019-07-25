@@ -11,27 +11,14 @@
 //
 
 import UIKit
+import Alamofire
 
+typealias responseLogin = (_ response: Login) -> ()
 
 class LoginWorker {
     
     let url = "https://bank-app-test.herokuapp.com/api/login"
     let ud  = UserDefaults.standard
-    
-    private static let basePathPost = "https://bank-app-test.herokuapp.com/api/login"
-    private static let configuration: URLSessionConfiguration = {
-
-        let config = URLSessionConfiguration.default
-        config.httpAdditionalHeaders = ["Content-Type": "application/json"]
-        config.timeoutIntervalForRequest = 5.0
-        config.httpMaximumConnectionsPerHost = 2
-
-        return config
-
-    }()
-
-private static let session = URLSession(configuration: configuration)
-
     
     func doSomeWork() { }
     
@@ -54,39 +41,26 @@ private static let session = URLSession(configuration: configuration)
         return self.ud.bool(forKey: "saveUser")
     }
 
-    
-    func validateLogin(userModel: Login.UserAccount, onComplete: @escaping (Bool) -> Void){
-        guard let url = URL(string: LoginWorker.basePathPost) else {
-                 onComplete(false)
-                    return
-                }
+
+    func validateLogin(parameters: [String: String], onComplete: @escaping(responseLogin)) {
         
-                var request = URLRequest(url: url)
-                request.httpMethod = "POST"
-                guard let json = try? JSONEncoder().encode(userModel) else {
-                    onComplete(false)
-                    return
+        Alamofire.request(url, method: .post, parameters: parameters, encoding: JSONEncoding.default).responseJSON(completionHandler: {
+            response in
+            
+            switch response.result {
+            case .success(_):
+                do {
+                    let loginResponse = try JSONDecoder().decode(Login.self, from: response.data!)
+                    onComplete(loginResponse)
+                } catch (let error) {
+                    print(error)
                 }
-        
-                request.httpBody = json
-        
-        let dataTask = LoginWorker.session.dataTask(with: url) { (dataJson, responseJson, error) in
-                    if error == nil {
-                        let response = responseJson as? HTTPURLResponse
-                        if response!.statusCode == 200 {
-                            let data = dataJson
-                            print("Login Worker Resultado: \(String(describing: data))")
-                            onComplete(true)
-                        } else {
-                            onComplete(false)
-                            print("Login Worker Código de retorno da requisição: \(String(describing: response?.statusCode))")
-                            return
-                        }
-                    } else {
-                        onComplete(false)
-                    }
-                }
-                dataTask.resume()
+            case .failure(let error):
+                print(error)
             }
+            
+        })
+    }
+    
     
 }
