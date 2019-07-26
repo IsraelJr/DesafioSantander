@@ -15,7 +15,7 @@ import UIKit
 protocol LoginBusinessLogic
 {
     func doSomething(request: Login.UserAccount)
-    func validateLogin(user: String, password: String)
+    func validateLogin(user: String, password: String) -> Bool
     func presentInfo(with: String)
     func saveData(button: UISwitch, user: UITextField)
     func loadDataUserDefault()
@@ -41,16 +41,17 @@ class LoginInteractor: LoginBusinessLogic, LoginDataStore
         presenter?.presentSomething(response: response)
     }
     
-    func validateLogin(user: String, password: String) {
+    func validateLogin(user: String, password: String) -> Bool {
         
         if  (isValidEmail(emailUser: user) || isValidCPF(cpfUser: user))
             &&
             (isValidPassword(passwordUser: password) || password == "1234")
         {
             getDataUser(user: user, password: password)
-            
+            return true
         } else {
             presenter?.showCustomAlert(alertTo: "buttonLogin")
+            return false
         }
     }
     

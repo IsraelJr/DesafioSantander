@@ -8,10 +8,50 @@
 
 import XCTest
 
+@testable import DesafioSantander
+
 class LoginViewControllerTests: XCTestCase {
 
+    var loginViewController: LoginViewController!
+    var loginInteractor: LoginInteractorSpy!
+    var window: UIWindow!
+    var button: UIButton = UIButton(type: .custom)
+    
+    class LoginInteractorSpy: LoginBusinessLogic {
+        var loggedIn: Bool = false
+        
+        func validateLogin(user: String, password: String) -> Bool {
+            loggedIn = true
+            return loggedIn
+        }
+        
+        func doSomething(request: Login.UserAccount) {
+            //nil
+        }
+        
+        func presentInfo(with: String) {
+            //nil
+        }
+        
+        func saveData(button: UISwitch, user: UITextField) {
+            //nil
+        }
+        
+        func loadDataUserDefault() {
+            //nil
+        }
+        
+    }
+    
     override func setUp() {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        window = UIWindow()
+        loginViewController = LoginViewController()
+        loginInteractor = LoginInteractorSpy()
+        loginViewController.interactor = loginInteractor
+        //button = loginViewController.buttonLogin
+        
+        window.addSubview(loginViewController.view)
+        RunLoop.current.run(until: Date())
     }
 
     override func tearDown() {
@@ -19,8 +59,11 @@ class LoginViewControllerTests: XCTestCase {
     }
 
     func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+        print("Test login view controller")
+        button.restorationIdentifier = "buttonLogin"
+        
+        self.loginViewController.actionButtons(button)
+        
     }
 
     func testPerformanceExample() {

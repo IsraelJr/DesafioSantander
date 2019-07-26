@@ -6,49 +6,17 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "DesafioSantander/Scenes/Statement/StatementWorker.swift"
-            timestampString = "585778254.023659"
+            filePath = "DesafioSantanderTests/ValidatorUtils.swift"
+            timestampString = "585793277.931597"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "28"
-            endingLineNumber = "28"
-            landmarkName = "loadStatements(onComplete:onError:)"
+            startingLineNumber = "19"
+            endingLineNumber = "19"
+            landmarkName = "test_isValidCpf()"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "DesafioSantander.StatementWorker.loadStatements(onComplete: (DesafioSantander.StatementModels) -&gt; (), onError: (DesafioSantander.StatementErrorWorker) -&gt; ()) -&gt; ()"
-                  moduleName = "DesafioSantander"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/israelalvessantosjunior/Desktop/DesafioSantander/DesafioSantander/Scenes/Statement/StatementWorker.swift"
-                  timestampString = "585778010.784801"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "33"
-                  endingLineNumber = "33"
-                  offsetFromSymbolStart = "52">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Alamofire.DataResponse&lt;Any&gt;) -&gt; () in DesafioSantander.StatementWorker.loadStatements(onComplete: (DesafioSantander.StatementModels) -&gt; (), onError: (DesafioSantander.StatementErrorWorker) -&gt; ()) -&gt; ()"
-                  moduleName = "DesafioSantander"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/israelalvessantosjunior/Desktop/DesafioSantander/DesafioSantander/Scenes/Statement/StatementWorker.swift"
-                  timestampString = "585778010.789883"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "35"
-                  endingLineNumber = "35"
-                  offsetFromSymbolStart = "246">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

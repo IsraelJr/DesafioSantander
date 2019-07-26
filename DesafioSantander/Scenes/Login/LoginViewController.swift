@@ -122,28 +122,29 @@ class LoginViewController: UIViewController, LoginDisplayLogic, UITextFieldDeleg
     
  func initializeLayout() {
         
-    valueInitialLcTopLogo               = lcTopLogo.constant
-    valueInitialLcLeadingUser           = lcLeadingUser.constant
-    valueInitialLcTrailingUser          = lcTrailingUser.constant
-    valueInitialLcSpaceTextSaveSwitch   = lcSpaceTextSaveSwitch.constant
-    valueInitialButtonLogin             = buttonLogin.alpha
-    valueInitiallcTrailingButtonInfo    = lcTrailingButtonInfo.constant
-    
-    lcTopLogo.constant                  = -100
-    lcLeadingUser.constant              = 17
-    lcTrailingUser.constant             = 270
-    lcTrailingButtonInfo.constant       = lcTrailingUser.constant
-    lcSpaceTextSaveSwitch.constant      = lcLeadingUser.constant
-    buttonLogin.alpha                   = 0.0
-    
-    buttonLogin.layer.cornerRadius      = 4
-    
-    view.layoutIfNeeded()
+//    valueInitialLcTopLogo               = lcTopLogo.constant
+//    valueInitialLcLeadingUser           = lcLeadingUser.constant
+//    valueInitialLcTrailingUser          = lcTrailingUser.constant
+//    valueInitialLcSpaceTextSaveSwitch   = lcSpaceTextSaveSwitch.constant
+//    valueInitialButtonLogin             = buttonLogin.alpha
+//    valueInitiallcTrailingButtonInfo    = lcTrailingButtonInfo.constant
+//    
+//    lcTopLogo.constant                  = -100
+//    lcLeadingUser.constant              = 17
+//    lcTrailingUser.constant             = 270
+//    lcTrailingButtonInfo.constant       = lcTrailingUser.constant
+//    lcSpaceTextSaveSwitch.constant      = lcLeadingUser.constant
+//    buttonLogin.alpha                   = 0.0
+//
+//    buttonLogin.layer.cornerRadius      = 4
+//
+//    view.layoutIfNeeded()
     
     
     timer?.invalidate()
     timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false) { (timer) in
-        self.animation()
+        print("")
+        //self.animation()
     }
  }
     

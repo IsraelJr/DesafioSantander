@@ -14,8 +14,7 @@ let cpfRegex =
 let emailRegEx =
     "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}"
 
-let characterPasswordRegEx = "^(?=.*?[A-Z])(?=.*?[a-z[0-9]])(?=.*?[#?!@$%^&*-.])[[A-Za-z[0-9]]#?!@$%^&*-.]{0,}$"
-
+let characterPasswordRegEx = "^(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*#?&])[A-Za-z0-9$@$!%*#?&]{3,}$"
 
 
 func isValidEmail(emailUser: String) -> Bool {

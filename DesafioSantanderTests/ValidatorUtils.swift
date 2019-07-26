@@ -11,42 +11,17 @@ import XCTest
 
 class ValidatorUtils: XCTestCase {
 
-    override func setUp() {
-        print("função setUp")
-    }
-
-    override func tearDown() {
-        print("função tearDown")
-    }
-
     func test_isValidEmail() {
-        let email = "asdf@gmail.com"
-        let result = isValidEmail(emailUser: email)
-        XCTAssertTrue(result)
-        print("função test_isValidEmail")
+        XCTAssertTrue(isValidEmail(emailUser: "asdf@gmail.com"))
     }
     
     func test_isValidCpf() {
-        let cpf = "12345678901"
-        let result = isValidCPF(cpfUser: cpf)
-        XCTAssertTrue(result)
-        print("função test_isValidCpf")
+        XCTAssertTrue(isValidCPF(cpfUser: "12345678901"))
+        XCTAssertTrue(isValidCPF(cpfUser: "123.456.789-01"))
     }
     
     func test_isValidPassword() {
-        let password = "A!1"
-        let result = isValidPassword(passwordUser: password)
-        XCTAssertTrue(result)
-        print("função test_isValidPassword")
-    }
-    
-    func testPerformanceExample() {
-        print("função testPerformanceExample")
-        // This is an example of a performance test case.
-        self.measure {
-            print("função testPerformanceExample measure")
-            // Put the code you want to measure the time of here.
-        }
+        XCTAssertTrue(isValidPassword(passwordUser: "A!1"))
     }
 
 }

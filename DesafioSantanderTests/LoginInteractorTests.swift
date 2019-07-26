@@ -22,7 +22,10 @@ class LoginInteractorTests: XCTestCase {
     }
 
     func test_validateLogin() {
-        loginInte.validateLogin(user: "1", password: "1")
+        XCTAssertTrue(loginInte.validateLogin(user: "a@gmail.com", password: "A!1"))
+        XCTAssertFalse(loginInte.validateLogin(user: "agmail.com", password: "A!1"))
+        XCTAssertFalse(loginInte.validateLogin(user: "a@gmail.com", password: "A!a"))
+        XCTAssertFalse(loginInte.validateLogin(user: "a@gmail.com", password: "A!"))
     }
     
     func test_loadDataUserDefault() {
