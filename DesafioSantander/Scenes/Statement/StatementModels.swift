@@ -23,7 +23,10 @@ struct StatementModels: Codable {
         var value: Double
         
         var valueFormatted: String {
-            return "R$ \(value)"
+            let numberFormatter = NumberFormatter()
+            numberFormatter.numberStyle = .currency
+            numberFormatter.locale = Locale(identifier: "pt_br")
+            return numberFormatter.string(from: NSNumber(value: self.value))!            
         }
         
         var dateFormatted: String {

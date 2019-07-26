@@ -121,30 +121,32 @@ class LoginViewController: UIViewController, LoginDisplayLogic, UITextFieldDeleg
      }
     
  func initializeLayout() {
-        
-//    valueInitialLcTopLogo               = lcTopLogo.constant
-//    valueInitialLcLeadingUser           = lcLeadingUser.constant
-//    valueInitialLcTrailingUser          = lcTrailingUser.constant
-//    valueInitialLcSpaceTextSaveSwitch   = lcSpaceTextSaveSwitch.constant
-//    valueInitialButtonLogin             = buttonLogin.alpha
-//    valueInitiallcTrailingButtonInfo    = lcTrailingButtonInfo.constant
-//    
-//    lcTopLogo.constant                  = -100
-//    lcLeadingUser.constant              = 17
-//    lcTrailingUser.constant             = 270
-//    lcTrailingButtonInfo.constant       = lcTrailingUser.constant
-//    lcSpaceTextSaveSwitch.constant      = lcLeadingUser.constant
-//    buttonLogin.alpha                   = 0.0
-//
-//    buttonLogin.layer.cornerRadius      = 4
-//
-//    view.layoutIfNeeded()
     
+    buttonLogin.layer.cornerRadius      = 4
+    buttonLogin.layer.shadowOffset      = CGSize(width: 0, height: 3)
+    buttonLogin.layer.shadowRadius      = 4
+    buttonLogin.layer.shadowOpacity     = 0.3
+    
+    valueInitialLcTopLogo               = lcTopLogo.constant
+    valueInitialLcLeadingUser           = lcLeadingUser.constant
+    valueInitialLcTrailingUser          = lcTrailingUser.constant
+    valueInitialLcSpaceTextSaveSwitch   = lcSpaceTextSaveSwitch.constant
+    valueInitialButtonLogin             = buttonLogin.alpha
+    valueInitiallcTrailingButtonInfo    = lcTrailingButtonInfo.constant
+    
+    lcTopLogo.constant                  = -100
+    lcLeadingUser.constant              = 17
+    lcTrailingUser.constant             = 270
+    lcTrailingButtonInfo.constant       = lcTrailingUser.constant
+    lcSpaceTextSaveSwitch.constant      = lcLeadingUser.constant
+    buttonLogin.alpha                   = 0.0
+
+    view.layoutIfNeeded()
     
     timer?.invalidate()
     timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false) { (timer) in
         print("")
-        //self.animation()
+        self.animation()
     }
  }
     
@@ -176,7 +178,7 @@ class LoginViewController: UIViewController, LoginDisplayLogic, UITextFieldDeleg
     case "buttonLogin":
         if let userValue = self.textFieldUser.text, let passwordValue = self.textFieldPassword.text {
             userLogin = textFieldUser.text!
-            interactor?.validateLogin(user: userValue, password: passwordValue)
+            _ = interactor?.validateLogin(user: userValue, password: passwordValue)
         }
     case "buttonInfo":
         interactor?.presentInfo(with: sender.restorationIdentifier!)

@@ -106,13 +106,15 @@ class StatementViewController: UIViewController, StatementDisplayLogic
     
     
     func displayDataAccount(accountUser: Login.UserAccount) {
-        var name = accountUser.name
-        if accountUser.name == "israel.junior2111@gmail.com" {
-            name = "Israel Alves Dos Santos Junior"
-        }
-        labelNamePerson.text = name
-        labelDataAccount.text = "\(accountUser.agency!) / \(accountUser.bankAccount!)"
-        labelBalance.text = String(format: "R$ %.2f", accountUser.balance!)
+        let balance = accountUser.balance
+        labelNamePerson.text = accountUser.name
+        labelDataAccount.text = "\(accountUser.bankAccount!) / \(accountUser.agency!)"
+        
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .currency
+        numberFormatter.locale = Locale(identifier: "pt_br")
+        labelBalance.text = String(numberFormatter.string(from: NSNumber(value: balance!))!)
+        
     }
     
     @IBAction func buttonLogout(_ sender: UIButton) {
