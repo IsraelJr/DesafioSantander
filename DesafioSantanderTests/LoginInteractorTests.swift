@@ -52,21 +52,21 @@ class LoginInteractorTests: QuickSpec {
         var alert       = false
         
         func presentSomething(response: Login.UserAccount) {
-            print("iasj pre function presentSomething")
+            print("function presentSomething")
         }
         
         func dataInitial(dataSwitch: Bool, dataUser: String) {
-            print("iasj pre function dataInitial")
+            print("function dataInitial")
         }
         
         func showCustomAlert(alertTo: String) {
             alert = true
-            print("iasj pre function showCustomAlert")
+            print("function showCustomAlert")
         }
         
         func login(userData: Login.UserAccount) {
             testLogin = true
-            print("iasj pre function login")
+            print("function login")
         }
         
         

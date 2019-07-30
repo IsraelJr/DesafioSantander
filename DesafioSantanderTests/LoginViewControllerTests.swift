@@ -23,26 +23,26 @@ class LoginViewControllerTests: QuickSpec {
         var info        = false
         
         func doSomething(request: Login.UserAccount) {
-            print("iasj function doSomething")
+            print("function doSomething")
         }
         
         func validateLogin(user: String, password: String) -> Bool {
             loggedIn = true
-            print("iasj function validateLogin:",loggedIn)
+            print("function validateLogin:",loggedIn)
             return loggedIn
         }
         
         func presentInfo(with: String) {
             info = true
-            print("iasj function presentInfo:",info)
+            print("function presentInfo:",info)
         }
         
         func saveData(button: UISwitch, user: UITextField) {
-            print("iasj function saveData")
+            print("function saveData")
         }
         
         func loadDataUserDefault() {
-            print("iasj function loadDataUserDefault")
+            print("function loadDataUserDefault")
         }
         
     }
@@ -74,7 +74,6 @@ class LoginViewControllerTests: QuickSpec {
                 self.loginViewController.buttonLogin.restorationIdentifier = "buttonInfo";
                 self.loginViewController.actionButtons(self.loginViewController.buttonLogin)
                 expect(self.loginInteractor.info).to(beTrue())
-                print("iasj fim it Info")
             }
             
             it("Pressed login button to call actionButton") {
