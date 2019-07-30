@@ -6,71 +6,91 @@
 //  Copyright © 2019 Israel Alves Santos Junior. All rights reserved.
 //
 
-import XCTest
+import Nimble
+import Quick
 
 @testable import DesafioSantander
 
-class LoginViewControllerTests: XCTestCase {
-
+class LoginViewControllerTests: QuickSpec {
+    
     var loginViewController: LoginViewController!
     var loginInteractor: LoginInteractorSpy!
     var window: UIWindow!
-    var button: UIButton = UIButton(type: .custom)
     
     class LoginInteractorSpy: LoginBusinessLogic {
-        var loggedIn: Bool = false
+        
+        var loggedIn    = false
+        var info        = false
+        
+        func doSomething(request: Login.UserAccount) {
+            print("iasj function doSomething")
+        }
         
         func validateLogin(user: String, password: String) -> Bool {
             loggedIn = true
+            print("iasj function validateLogin:",loggedIn)
             return loggedIn
         }
         
-        func doSomething(request: Login.UserAccount) {
-            //nil
-        }
-        
         func presentInfo(with: String) {
-            //nil
+            info = true
+            print("iasj function presentInfo:",info)
         }
         
         func saveData(button: UISwitch, user: UITextField) {
-            //nil
+            print("iasj function saveData")
         }
         
         func loadDataUserDefault() {
-            //nil
+            print("iasj function loadDataUserDefault")
         }
         
     }
     
-    override func setUp() {
+    fileprivate func setup() {
+
         window = UIWindow()
-        loginViewController = LoginViewController()
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        loginViewController = (storyboard.instantiateInitialViewController() as! LoginViewController)
+        
         loginInteractor = LoginInteractorSpy()
         loginViewController.interactor = loginInteractor
-        //button = loginViewController.buttonLogin
         
         window.addSubview(loginViewController.view)
         RunLoop.current.run(until: Date())
-    }
 
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
-
-    func testExample() {
-        print("Test login view controller")
-        button.restorationIdentifier = "buttonLogin"
+    
+    override func spec() {
         
-        self.loginViewController.actionButtons(button)
-        
-    }
-
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
+        describe("Test button view controller login") {
+            
+            beforeEach {
+                self.setup()
+            }
+            
+            it("Pressed info button to call actionButton") {
+                self.loginViewController.buttonLogin.restorationIdentifier = "buttonInfo";
+                self.loginViewController.actionButtons(self.loginViewController.buttonLogin)
+                expect(self.loginInteractor.info).to(beTrue())
+                print("iasj fim it Info")
+            }
+            
+            it("Pressed login button to call actionButton") {
+                self.loginViewController.buttonLogin.restorationIdentifier = "buttonLogin";
+                self.loginViewController.actionButtons(self.loginViewController.buttonLogin)
+                expect(self.loginInteractor.loggedIn).to(beTrue())
+            }
+            
+            it("Call actionButton with value unexpected") {
+                self.loginViewController.buttonLogin.restorationIdentifier = "xXx";
+                self.loginViewController.actionButtons(self.loginViewController.buttonLogin)
+                expect(self.loginInteractor.info).to(beTrue())
+            }
+            
         }
+        
     }
-
+    
 }

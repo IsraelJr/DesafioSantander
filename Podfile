@@ -5,6 +5,8 @@ target 'DesafioSantander' do
   # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
 	pod 'Alamofire'
+	pod 'Quick'
+	pod 'Nimble'
 
   # Pods for DesafioSantander
 
@@ -12,7 +14,9 @@ target 'DesafioSantander' do
     inherit! :search_paths
     # Pods for testing
 	pod 'Alamofire'
-
+	pod 'Quick'
+	pod 'Nimble'
+	
   end
 
 end

@@ -6,46 +6,120 @@
 //  Copyright © 2019 Israel Alves Santos Junior. All rights reserved.
 //
 
-import XCTest
+//import XCTest
+//@testable import DesafioSantander
+//
+//class LoginInteractorTests: XCTestCase {
+//
+//    let loginInte = LoginInteractor()
+//
+//    func test_validateLogin() {
+//        XCTAssertTrue(loginInte.validateLogin(user: "a@gmail.com", password: "A!1"))
+//        XCTAssertFalse(loginInte.validateLogin(user: "agmail.com", password: "A!1"))
+//        XCTAssertFalse(loginInte.validateLogin(user: "a@gmail.com", password: "A!a"))
+//        XCTAssertFalse(loginInte.validateLogin(user: "a@gmail.com", password: "A!"))
+//    }
+//
+//    func test_loadDataUserDefault() {
+//        loginInte.loadDataUserDefault()
+//    }
+//
+//    func test_presentInfo() {
+//        loginInte.presentInfo(with: "buttonInfo")
+//    }
+//
+//    func test_doSomething() {
+//        let lua = Login.UserAccount(userId: 1, name: "José", agency: "0642", bankAccount: "010234625", balance: 10.0)
+//        loginInte.doSomething(request: lua)
+//    }
+//
+//}
+
+
+import Nimble
+import Quick
+
 @testable import DesafioSantander
 
-class LoginInteractorTests: XCTestCase {
+class LoginInteractorTests: QuickSpec {
 
-    let loginInte = LoginInteractor()
+    var loginInteractor: LoginInteractor!
+    var loginPresenter: LoginPresenterSpy!
     
-    override func setUp() {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+    class LoginPresenterSpy: LoginPresentationLogic {
+        
+        var testLogin   = false
+        var alert       = false
+        
+        func presentSomething(response: Login.UserAccount) {
+            print("iasj pre function presentSomething")
+        }
+        
+        func dataInitial(dataSwitch: Bool, dataUser: String) {
+            print("iasj pre function dataInitial")
+        }
+        
+        func showCustomAlert(alertTo: String) {
+            alert = true
+            print("iasj pre function showCustomAlert")
+        }
+        
+        func login(userData: Login.UserAccount) {
+            testLogin = true
+            print("iasj pre function login")
+        }
+        
+        
     }
+    
+    fileprivate func setup() {
+        
+        loginInteractor = LoginInteractor()
+        loginPresenter  = LoginPresenterSpy()
+        loginInteractor.presenter = loginPresenter
+        
+    }
+    
+    override func spec() {
+        
+        describe("Test data login") {
+            
+            beforeEach {
+                self.setup()
+            }
+            
+            it("Data user valid") {
+                
+                _ = self.loginInteractor.validateLogin(user: "a@gmail.com", password: "A!1")
+                expect(self.loginPresenter.alert).toNot(beTrue())
+                
+                _ = self.loginInteractor.validateLogin(user: "a@gmail.com", password: "Aas!afD2sd4f@")
+                expect(self.loginPresenter.alert).toNot(beTrue())
+                
+                _ = self.loginInteractor.validateLogin(user: "12345678912", password: "A!1")
+                expect(self.loginPresenter.alert).toNot(beTrue())
+                
+                _ = self.loginInteractor.validateLogin(user: "123.456.789-12", password: "A!1")
+                expect(self.loginPresenter.alert).toNot(beTrue())
+                
+            }
+            
+            it("Data user invalid") {
 
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
+                _ = self.loginInteractor.validateLogin(user: "a@gmail.com", password: "A!")
+                expect(self.loginPresenter.alert).to(beTrue())
 
-    func test_validateLogin() {
-        XCTAssertTrue(loginInte.validateLogin(user: "a@gmail.com", password: "A!1"))
-        XCTAssertFalse(loginInte.validateLogin(user: "agmail.com", password: "A!1"))
-        XCTAssertFalse(loginInte.validateLogin(user: "a@gmail.com", password: "A!a"))
-        XCTAssertFalse(loginInte.validateLogin(user: "a@gmail.com", password: "A!"))
-    }
-    
-    func test_loadDataUserDefault() {
-        loginInte.loadDataUserDefault()
-    }
-    
-    func test_presentInfo() {
-        loginInte.presentInfo(with: "buttonInfo")
-    }
-    
-    func test_doSomething() {
-        let lua = Login.UserAccount(userId: 1, name: "José", agency: "0642", bankAccount: "010234625", balance: 10.0)
-        loginInte.doSomething(request: lua)
-    }
-    
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
+                _ = self.loginInteractor.validateLogin(user: "agmail.com", password: "A!1")
+                expect(self.loginPresenter.alert).to(beTrue())
+
+                _ = self.loginInteractor.validateLogin(user: "agmail.com", password: "A!dadaada@E")
+                expect(self.loginPresenter.alert).to(beTrue())
+
+                _ = self.loginInteractor.validateLogin(user: "a@gmail.com", password: "A!dada!")
+                expect(self.loginPresenter.alert).to(beTrue())
+
+            }
         }
     }
-
+    
 }
